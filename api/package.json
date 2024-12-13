@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/main.ts",
   "scripts": {
-    "start": "ts-node-dev --respawn -P tsconfig.json src/main.ts | pino-pretty -l",
+    "start": "ts-node-dev --respawn -P tsconfig.json -r dotenv/config src/main.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,7 +12,9 @@
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.16.0",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "@types/morgan": "^1.9.9",
     "@types/node": "^22.10.1",
     "eslint": "^9.16.0",
     "prettier": "3.4.1",
@@ -21,7 +23,10 @@
     "typescript-eslint": "^8.16.0"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "morgan": "^1.10.0",
     "pino": "^9.5.0",
     "pino-pretty": "^13.0.0"
   }

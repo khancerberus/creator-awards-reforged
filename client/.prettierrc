@@ -1,6 +1,9 @@
-parser: "typescript"
-printWidth: 100
-useTabs: false
-semi: true
-singleQuote: true
-jsxSingleQuote: false
+{
+    "parser": "typescript",
+    "printWidth": 100,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "jsxSingleQuote": false,
+    "plugins": ["prettier-plugin-tailwindcss"]
+}
