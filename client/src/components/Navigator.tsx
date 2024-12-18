@@ -7,6 +7,7 @@ import { classNames } from 'primereact/utils';
 import { motion, AnimatePresence } from 'motion/react';
 
 import '../assets/css/navigator.css';
+import { Card } from 'pixel-retroui';
 
 interface ItemLinkProps {
   to: string;
@@ -37,7 +38,16 @@ export const Navigator = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   return (
-    <nav className="z-20 relative flex w-full justify-between bg-black md:mt-5 md:w-[50rem] md:rounded-full md:px-10">
+    <Card
+      bg="black"
+      textColor="#f193ff"
+      shadowColor="#913ddb"
+      borderColor="#7f61ff"
+      className="relative z-20 flex w-full justify-between md:mt-5 md:w-[50rem] md:px-10"
+      style={{
+        filter: 'drop-shadow(0 0 15px #4d3bd9)',
+      }}
+    >
       <div className="px-5 py-2">
         <Link to="/">
           <Logo />
@@ -60,7 +70,7 @@ export const Navigator = () => {
           <motion.div
             className={classNames(
               isOpen ? 'flex' : 'hidden',
-              isMobile ? 'absolute left-0 top-full w-full flex-col bg-black z-10' : 'flex-row',
+              isMobile ? 'absolute left-0 top-full z-10 w-full flex-col bg-black' : 'flex-row',
             )}
             initial={{ y: '-100%' }}
             animate={{ y: 0 }}
@@ -72,6 +82,6 @@ export const Navigator = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </Card>
   );
 };
