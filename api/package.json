@@ -2,10 +2,12 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "src/main.ts",
+  "main": "src/server.ts",
   "scripts": {
-    "start": "ts-node-dev --respawn -P tsconfig.json -r dotenv/config src/main.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "ts-node-dev -P tsconfig.json -r dotenv/config src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "debug": "ts-node-dev --inspect=25999 --files --transpile-only --respawn --project tsconfig.json -r dotenv/config src/server.ts"
   },
   "keywords": [],
   "author": "",
