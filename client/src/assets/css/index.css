@@ -1,6 +1,9 @@
+@import 'pixel-retroui/dist/index.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 :root {
   font-family: sans-serif;
@@ -9,12 +12,26 @@
 
   color-scheme: light dark;
   color: white;
-  background-color: #16161D;
+  background-color: #101016;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --text-normal: #f193ff;
+  --text-accent: #f0beff;
+  
+  --bg-normal: black;
+  --bg-accent: #913ddb;
+
+  --border-normal: #7f61ff;
+  --border-accent: #7f61ff;
+
+  --shadow-normal: #913ddb;
+  --shadow-accent: black;
+
+  --neon-normal: #4d3bd9;
 }
 
 html {
