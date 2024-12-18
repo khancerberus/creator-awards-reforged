@@ -1,3 +1,3 @@
 export interface TwitchUserType {
-  id: string;
+    id: string;
 }

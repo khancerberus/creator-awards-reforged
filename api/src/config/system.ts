@@ -1,9 +1,28 @@
-/**
- * PORT number for the server
- */
-export const PORT = Number(process.env.PORT) || 3000;
+const {
+    PORT: port = '3000',
+    ORIGIN: origin = 'http://localhost:5173',
+    BASE_PATH: basePath = '/api/v1'
+} = process.env;
 
 /**
- * Allowed origin for CORS
+ * Configuration for the server
+ *
+ * - port: PORT number for the server
+ * - origin: Allowed origin for CORS
  */
-export const ORIGIN = process.env.ORIGIN?.split(',') ?? 'http://localhost:5173';
+export const config = {
+    /**
+     * PORT number for the server
+     */
+    port,
+
+    /**
+     * Allowed origin for CORS
+     */
+    origin,
+
+    /**
+     * Base path for the API
+     */
+    basePath
+};
