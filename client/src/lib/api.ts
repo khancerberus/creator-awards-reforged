@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { API_HOST } from '../config/system';
+import { config } from '../config/system';
 
 export const api = axios.create({
-  baseURL: API_HOST,
+  baseURL: config.apiHost,
   headers: {
     'Content-Type': 'application/json',
   },
