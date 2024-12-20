@@ -1,5 +1,5 @@
 parser: "typescript"
-printWidth: 79
+printWidth: 120
 useTabs: false
 semi: true
 singleQuote: true
