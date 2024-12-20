@@ -3,7 +3,7 @@ import { ArrowFatDown } from "@phosphor-icons/react"
 import { Card } from 'pixel-retroui';
 import '@/assets/css/app.css'
 
-export const App = () => {
+export const HomePage = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-5 p-4">
       <h1 className="text-3xl font-bold">Creator Awards 2024</h1>

@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 
 import './assets/css/index.css';
-import { App } from './pages/App.tsx';
+import { HomePage } from './pages/home.page.tsx';
 import { BaseLayout } from './layouts/BaseLayout.tsx';
 import { Ticket } from './pages/ticket.page.tsx';
 import { AuthPage } from "./pages/auth.page.tsx"
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <App />,
+        element: <HomePage />,
       },
       {
         path: '/auth',
