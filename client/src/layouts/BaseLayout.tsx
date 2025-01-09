@@ -2,7 +2,7 @@ import { PrimeReactProvider } from 'primereact/api';
 import { Outlet } from 'react-router-dom';
 import { Navigator } from '@/components/Navigator';
 import Tailwind from 'primereact/passthrough/tailwind';
-import { Toaster } from "sonner"
+import { Toaster } from 'sonner';
 
 export const BaseLayout = () => {
   return (
@@ -13,7 +13,7 @@ export const BaseLayout = () => {
       }}
     >
       <Toaster theme="dark" richColors />
-      <main className="flex flex-col gap-5 w-full justify-center items-center">
+      <main className="flex flex-col justify-center items-center overflow-hidden">
         <Navigator />
         <Outlet />
       </main>

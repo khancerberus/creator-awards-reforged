@@ -17,7 +17,7 @@ export const LoginButton = () => {
   return (
     <Button
       bg="#913ddb"
-      textColor="#f0beff"
+      textColor="white"
       shadow="black"
       borderColor="#7f61ff"
       onClick={handleClickLogin}
