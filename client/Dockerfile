@@ -16,6 +16,8 @@ RUN pnpm run build
 # Run phase
 FROM nginx:stable-alpine-perl
 
+RUN apk add --no-cache certbot certbot-nginx
+
 COPY --from=build /app/.nginx/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 RUN rm /etc/nginx/conf.d/default.conf
