@@ -1,6 +1,6 @@
 export const Ticket = () => {
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center gap-5 pt-[15vh] w-screen h-screen">
       <h1>Ticket</h1>
 
       <iframe
