@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.0.1...v0.1.0) (2025-01-28)
+
+
+### Features
+
+* add certbot for SSL certificate management and configure Docker volumes for Let's Encrypt ([c8feff4](https://github.com/khancerberus/creator-awards-reforged/commit/c8feff4ae689eb46b8f68ccf38738b7123f2a3f8))
+* add site.webmanifest for improved PWA support ([3bc8f46](https://github.com/khancerberus/creator-awards-reforged/commit/3bc8f4623c9009ec405c5ba46400d70fcd6becf1))
+* add TicketButton component for navigation to ticket page ([b3a7c3b](https://github.com/khancerberus/creator-awards-reforged/commit/b3a7c3bd52937ae9985a69bca376fcd77795b168))
+* configure Nginx for HTTP to HTTPS redirection and set up SSL for frontend and API ([358ac32](https://github.com/khancerberus/creator-awards-reforged/commit/358ac3203504add6a52d8a59ed2bc09f01fb3787))
+* enhance Ticket page layout with flexbox for improved responsiveness ([30ef1e3](https://github.com/khancerberus/creator-awards-reforged/commit/30ef1e3d8b180121b052839b2c5c219ebac0618d))
+* implement countdown component and enhance styling with new animations and background images ([ffc34e2](https://github.com/khancerberus/creator-awards-reforged/commit/ffc34e2dae632a75f307d8c4b9db870d95582960))
+* update index.html with additional favicon links and modify title for 2024 ([3bc8f46](https://github.com/khancerberus/creator-awards-reforged/commit/3bc8f4623c9009ec405c5ba46400d70fcd6becf1))
+
+
+### Bug Fixes
+
+* enable StrictMode in main.tsx for improved performance and debugging ([0fac1ba](https://github.com/khancerberus/creator-awards-reforged/commit/0fac1ba49b54cc4902fcb0a15fbfa1d40f8c8a6a))
+
 ## 0.0.1 (2024-12-20)
 
 
