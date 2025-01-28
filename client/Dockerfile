@@ -1,3 +1,4 @@
+# Build phase
 FROM node:22.12.0-alpine3.21 as build
 
 WORKDIR /app
@@ -12,7 +13,7 @@ COPY . .
 
 RUN pnpm run build
 
-
+# Run phase
 FROM nginx:stable-alpine-perl
 
 COPY --from=build /app/.nginx/nginx.conf /etc/nginx/conf.d/nginx.conf

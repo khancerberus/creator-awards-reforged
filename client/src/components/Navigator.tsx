@@ -1,13 +1,10 @@
-import { Link } from 'react-router-dom';
-import { Logo } from './Logo';
-import { useEffect, useState } from 'react';
-import { Button } from 'primereact/button';
-import { DotsThreeOutlineVertical } from '@phosphor-icons/react';
-import { classNames } from 'primereact/utils';
-import { motion, AnimatePresence } from 'motion/react';
+import { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
+import { Logo } from './Logo';
 import '../assets/css/navigator.css';
-import { Card } from 'pixel-retroui';
+import { LoginButton } from './LoginButton';
+import { classNames } from 'primereact/utils';
 
 interface ItemLinkProps {
   to: string;
@@ -18,7 +15,7 @@ const ItemLink = ({ to, label }: ItemLinkProps) => {
   return (
     <Link
       to={to}
-      className="flex items-center justify-center rounded-full px-4 py-2 text-[#F7DFAE] transition-colors duration-200 hover:bg-[#16161D] hover:text-[#F88D3C]"
+      className="flex items-center justify-center text-[#F7DFAE] transition-colors duration-200 hover:text-[#F88D3C]"
     >
       {label}
     </Link>
@@ -26,62 +23,46 @@ const ItemLink = ({ to, label }: ItemLinkProps) => {
 };
 
 export const Navigator = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [isOpen, setIsOpen] = useState(window.innerWidth > 768);
+  const location = useLocation();
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-      if (window.innerWidth > 768) setIsOpen(true);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+
   return (
-    <Card
-      bg="black"
-      textColor="#f193ff"
-      shadowColor="#913ddb"
-      borderColor="#7f61ff"
-      className="relative z-20 flex w-full justify-between md:mt-5 md:w-[50rem] md:px-10"
-      style={{
-        filter: 'drop-shadow(0 0 15px #4d3bd9)',
-      }}
+    <nav
+      className={classNames(
+        'absolute top-0 z-10 flex h-[15vh] w-full max-w-[1300px] flex-col items-center justify-center gap-2',
+      )}
     >
-      <div className="px-5 py-2">
-        <Link to="/">
-          <Logo />
-        </Link>
-      </div>
+      <div className="flex w-full max-w-[1000px] items-center justify-between">
+        <section className="flex w-[30rem] items-center justify-center">
+          <Link to="/">
+            <Logo />
+          </Link>
+        </section>
 
-      <div className={isMobile ? 'flex px-5 py-2' : 'hidden'}>
-        <Button
-          icon={<DotsThreeOutlineVertical size={24} />}
-          rounded
-          outlined
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
-        />
-      </div>
+        <section className="flex w-[30rem] items-center justify-center gap-5">
+          <ItemLink to="/ticket" label="Ticket" />
+          <ItemLink to="/vote" label="Votar" />
+          <ItemLink to="/#about" label="¿Qué es esto?" />
+        </section>
 
-      <AnimatePresence>
-        {isMobile && isOpen && (
-          <motion.div
-            className={classNames(
-              isOpen ? 'flex' : 'hidden',
-              isMobile ? 'absolute left-0 top-full z-10 w-full flex-col bg-black' : 'flex-row',
-            )}
-            initial={{ y: '-100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '-100%' }}
-          >
-            <ItemLink to="/ticket" label="Ticket" />
-            <ItemLink to="/vote" label="Votar" />
-            <ItemLink to="/about" label="Qué es esto?" />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </Card>
+        <section className="flex w-[30rem] items-center justify-center">
+          <LoginButton />
+        </section>
+      </div>
+      <div
+        className="flex h-[2px] w-full"
+        style={{
+          background: 'linear-gradient(90deg, #0000 10%, #F7DFAE 35% 65%, #0000 90%)',
+        }}
+      ></div>
+    </nav>
   );
 };
