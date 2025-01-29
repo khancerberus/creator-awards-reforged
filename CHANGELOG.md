@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/khancerberus/creator-awards-reforged/compare/v0.2.2...v0.2.3) (2025-01-29)
+
+
+### Bug Fixes
+
+* update Open Graph meta tags for Creator Awards event ([164fa17](https://github.com/khancerberus/creator-awards-reforged/commit/164fa177be41ef0cb4667915e21a7856998dc30f))
+
 ## [0.2.2](https://github.com/khancerberus/creator-awards-reforged/compare/v0.2.1...v0.2.2) (2025-01-29)
 
 
