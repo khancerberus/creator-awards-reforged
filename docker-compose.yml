@@ -3,6 +3,7 @@ services:
     build:
       context: ./api
       dockerfile: Dockerfile
+    env_file: ./api/.env
     ports:
       - 5432:5432
     networks:
