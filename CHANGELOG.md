@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/khancerberus/creator-awards-reforged/compare/v0.2.1...v0.2.2) (2025-01-29)
+
+
+### Bug Fixes
+
+* add env_file configuration to PostgreSQL service in docker-compose ([237666e](https://github.com/khancerberus/creator-awards-reforged/commit/237666e347be956ac5de3676b451d3cf6ebda593))
+
 ## [0.2.1](https://github.com/khancerberus/creator-awards-reforged/compare/v0.2.0...v0.2.1) (2025-01-29)
 
 
