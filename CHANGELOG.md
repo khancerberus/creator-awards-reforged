@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.1.0...v0.2.0) (2025-01-29)
+
+
+### Features
+
+* update Nginx configuration for awards.cotecreator.com and enable Certbot validation ([d4dcdaa](https://github.com/khancerberus/creator-awards-reforged/commit/d4dcdaae173e3103999439b95d6a943b0293375f))
+
 ## [0.1.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.0.1...v0.1.0) (2025-01-28)
 
 
