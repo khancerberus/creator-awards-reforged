@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/khancerberus/creator-awards-reforged/compare/v0.2.0...v0.2.1) (2025-01-29)
+
+
+### Bug Fixes
+
+* expose PostgreSQL port in docker-compose configuration ([36b85cd](https://github.com/khancerberus/creator-awards-reforged/commit/36b85cd4d52725f97708fede5946ab1fa9e0eca6))
+
 ## [0.2.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.1.0...v0.2.0) (2025-01-29)
 
 
