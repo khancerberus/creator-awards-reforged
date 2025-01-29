@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.4](https://github.com/khancerberus/creator-awards-reforged/compare/v0.2.3...v0.2.4) (2025-01-29)
+
+
+### Bug Fixes
+
+* add restart policy to services in docker-compose ([e075e2d](https://github.com/khancerberus/creator-awards-reforged/commit/e075e2d2443a587ef41297d343eac7fa2fe100d5))
+* update event timestamp for accuracy ([3cf2438](https://github.com/khancerberus/creator-awards-reforged/commit/3cf2438c35d2d5ccfb1e502929efdf378271121b))
+
 ## [0.2.3](https://github.com/khancerberus/creator-awards-reforged/compare/v0.2.2...v0.2.3) (2025-01-29)
 
 
