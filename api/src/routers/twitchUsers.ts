@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { TwitchUsersController } from '../controllers/twitchUsers';
-import { TwitchUserModel } from '../models/sequelize/TwitchUser';
+import { TwitchUserModel } from '../models/sequelize/twitchUsers';
 
 export const createTwitchUsersRouter = ({ twitchUserModel }: { twitchUserModel: typeof TwitchUserModel }) => {
     const router = Router();

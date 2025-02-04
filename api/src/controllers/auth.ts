@@ -1,7 +1,6 @@
 import { RequestHandler } from 'express';
-import { TwitchUserModel } from '../models/sequelize/TwitchUser';
+import { TwitchUserModel } from '../models/sequelize/twitchUsers';
 import { TwitchAPIService } from '../services/twitch.api';
-import { generateJWT } from '../utils/jwt';
 
 interface AuthControllerProps {
     twitchUserModel: typeof TwitchUserModel;
@@ -14,7 +13,7 @@ export class AuthController {
         this.twitchUserModel = twitchUserModel;
     }
 
-    getToken: RequestHandler = async (req, res, next) => {
+    openSession: RequestHandler = async (req, res, next) => {
         try {
             // 1. Get the Twitch code from the request body
             const { code } = req.body;
@@ -35,33 +34,83 @@ export class AuthController {
             }
 
             // 3. Use the Twitch ID to get the user's from the database (if it exists, create it otherwise)
-            const twitchUser = await this.twitchUserModel.getByTwitchId(twitchUserData);
-            if (twitchUser) {
-                const updatedTwitchUser = await this.twitchUserModel.edit({
+            let twitchUser = await this.twitchUserModel.getByTwitchId(twitchUserData);
+            if (!twitchUser) {
+                twitchUser = await this.twitchUserModel.add(twitchUserData);
+                if (!twitchUser) {
+                    res.status(500).json({ message: 'Failed to create user' });
+                    return;
+                }
+            } else {
+                twitchUser = await this.twitchUserModel.edit({
                     id: twitchUser.id,
                     toUpdate: twitchUserData,
                 });
-                if (!updatedTwitchUser) {
-                    // 4.1. Generate a JWT token with the public ID and return it
-                    const jwt = generateJWT({ payload: { sub: twitchUser.publicId } });
-                    res.status(200).json({ token: jwt });
+                if (!twitchUser) {
+                    res.status(500).json({ message: 'Failed to update user' });
                     return;
                 }
-
-                // 4.2. Generate a JWT token with the public ID and return it
-                const jwt = generateJWT({ payload: { sub: updatedTwitchUser.publicId } });
-                res.status(200).json({ token: jwt });
             }
 
-            const newTwitchUser = await this.twitchUserModel.add(twitchUserData);
-            if (!newTwitchUser) {
-                res.status(500).json({ message: 'Failed to create user' });
+            req.session.regenerate((err) => {
+                if (err) return next(err);
+
+                req.session.userID = twitchUser.publicId;
+                req.session.twitchAccessToken = token.access_token;
+
+                req.session.save((err) => {
+                    if (err) return next(err);
+                    return res.status(201).json({
+                        user: {
+                            publicId: twitchUser.publicId,
+                            displayName: twitchUser.displayName,
+                            profileImageUrl: twitchUser.profileImageUrl,
+                        },
+                    });
+                });
+            });
+        } catch (error) {
+            next(error);
+        }
+    };
+
+    closeSession: RequestHandler = async (req, res, next) => {
+        try {
+            req.session.destroy((err) => {
+                if (err) return next(err);
+
+                res.clearCookie('connect.sid', {
+                    path: '/',
+                });
+
+                return res.status(200).json({ message: 'Session closed' });
+            });
+        } catch (error) {
+            next(error);
+        }
+    };
+
+    getSessionUser: RequestHandler = async (req, res, next) => {
+        try {
+            const userID = req.session.userID;
+            if (!userID) {
+                res.status(404).json({ message: 'User not found' });
                 return;
             }
 
-            // 4.3. Generate a JWT token with the public ID and return it
-            const jwt = generateJWT({ payload: { sub: newTwitchUser.publicId } });
-            res.status(201).json({ token: jwt });
+            const user = await this.twitchUserModel.getByPublicId({ publicId: userID });
+            if (!user) {
+                res.status(404).json({ message: 'User not found' });
+                return;
+            }
+
+            res.status(200).json({
+                user: {
+                    publicId: user.publicId,
+                    displayName: user.displayName,
+                    profileImageUrl: user.profileImageUrl,
+                },
+            });
         } catch (error) {
             next(error);
         }

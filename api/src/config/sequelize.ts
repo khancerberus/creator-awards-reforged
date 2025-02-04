@@ -3,7 +3,7 @@ import { config } from './system';
 import { logger } from './logger';
 
 export const sequelize = new Sequelize(config().dbUri, {
-    logging: logger.debug.bind(logger),
+    logging: config().isProduction ? false : logger.debug.bind(logger),
     dialect: 'postgres',
     pool: {
         max: 5,
