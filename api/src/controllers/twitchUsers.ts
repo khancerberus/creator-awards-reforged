@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { TwitchUserModel } from '../models/sequelize/TwitchUser';
+import { TwitchUserModel } from '../models/sequelize/twitchUsers';
 
 export class TwitchUsersController {
     declare twitchUserModel: typeof TwitchUserModel;

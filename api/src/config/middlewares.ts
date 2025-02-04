@@ -12,6 +12,7 @@ const cors = () =>
         origin: config().origin,
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: true,
     });
 
 const httpLogger = (): RequestHandler => (req, res, next) => {
@@ -50,10 +51,24 @@ const errorHandler = (): ErrorRequestHandler => (error, _req, res, next) => {
     res.status(500).json({ error: 'Internal Server Error' });
 };
 
+const isAuthenticated = ({ bypass }: { bypass: string[] }): RequestHandler =>
+    ((req, res, next) => {
+        if (bypass.includes(req.path)) {
+            return next();
+        }
+
+        if (!req.session.userID) {
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
+
+        next();
+    }) as RequestHandler;
+
 export const middlewares = {
     json,
     cors,
     httpLogger,
     errorHandler,
     notFoundHandler,
+    isAuthenticated,
 };

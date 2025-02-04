@@ -1,5 +1,5 @@
 import { CreationOptional, DataTypes, Model } from 'sequelize';
-import { CreateTwitchUserType, TwitchUserType, UpdateTwitchUserType } from '../../typings/twitch-user';
+import { CreateTwitchUserType, TwitchUserType, UpdateTwitchUserType } from '../../typings/twitchUsers';
 import { sequelize } from '../../config/sequelize';
 
 export class TwitchUserModel extends Model implements TwitchUserType {
@@ -16,7 +16,7 @@ export class TwitchUserModel extends Model implements TwitchUserType {
 
     static getByPublicId = async ({ publicId }: { publicId: string }): Promise<TwitchUserModel | null> => {
         return TwitchUserModel.findOne({ where: { publicId } });
-    }
+    };
 
     static getByTwitchId = async ({ twitchId }: { twitchId: string }): Promise<TwitchUserModel | null> => {
         return TwitchUserModel.findOne({ where: { twitchId } });
@@ -53,9 +53,9 @@ export class TwitchUserModel extends Model implements TwitchUserType {
 TwitchUserModel.init(
     {
         id: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             primaryKey: true,
-            defaultValue: DataTypes.UUIDV4,
+            autoIncrement: true,
         },
         publicId: {
             type: DataTypes.UUID,
@@ -81,10 +81,14 @@ TwitchUserModel.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        ticketId: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
     },
     {
         sequelize,
-        tableName: 'twitch_users',
+        tableName: 'TWITCH_USERS',
         timestamps: true,
     },
 );

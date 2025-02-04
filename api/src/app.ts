@@ -4,17 +4,53 @@ import { config, middlewares, logger } from './config';
 import { createAuthRouter } from './routers/auth';
 import { CreateServerProps } from './typings/configs';
 import { createTwitchUsersRouter } from './routers/twitchUsers';
+import { createClient } from 'redis';
+import session from 'express-session';
+import { RedisStore } from 'connect-redis';
+
+export const redisClient = createClient();
 
 let tries = 0;
 const maxTries = 5;
 
-export const createServer = ({ twitchUserModel }: CreateServerProps) => {
+export const createServer = async ({ twitchUserModel }: CreateServerProps) => {
     const app = express();
+
+    redisClient.on('error', (error) => {
+        logger.error(error);
+    });
+
+    await redisClient.connect();
+
+    const redisStore = new RedisStore({
+        client: redisClient,
+        prefix: 'session:',
+    });
+
+    app.use(
+        session({
+            store: redisStore,
+            resave: false,
+            saveUninitialized: false,
+            secret: config().sessionSecret,
+            cookie: {
+                secure: config().isProduction,
+                httpOnly: true,
+                maxAge: 1000 * 60 * 60 * 24,
+                sameSite: 'strict',
+            },
+        }),
+    );
 
     //region Middlewares
     app.use(middlewares.cors());
     app.use(middlewares.json());
     app.use(middlewares.httpLogger());
+    app.use(
+        middlewares.isAuthenticated({
+            bypass: ['/api/v1/auth/open-session'],
+        }),
+    );
 
     //region Routes
     const baseRouter = Router();

@@ -10,4 +10,4 @@ export interface TwitchUserType {
 export type CreateTwitchUserType = Omit<TwitchUserType, 'id' | 'publicId'>;
 export type UpdateTwitchUserType = Partial<CreateTwitchUserType>;
 
-export type ForTokenTwitchUserType = Omit<TwitchUserType, 'twitchId' | 'email' >;
+export type ForTokenTwitchUserType = Omit<TwitchUserType, 'twitchId' | 'email'>;

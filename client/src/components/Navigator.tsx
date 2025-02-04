@@ -5,6 +5,7 @@ import { Logo } from './Logo';
 import '../assets/css/navigator.css';
 import { LoginButton } from './LoginButton';
 import { classNames } from 'primereact/utils';
+import { useAuth } from '@/hooks/useAuth';
 
 interface ItemLinkProps {
   to: string;
@@ -24,6 +25,7 @@ const ItemLink = ({ to, label }: ItemLinkProps) => {
 
 export const Navigator = () => {
   const location = useLocation();
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     if (location.hash) {
@@ -54,7 +56,13 @@ export const Navigator = () => {
         </section>
 
         <section className="flex w-[30rem] items-center justify-center">
-          <LoginButton />
+          {!user ? (
+            <LoginButton />
+          ) : (
+            <div className="flex cursor-pointer items-center justify-center" onClick={logout}>
+              {user.displayName}
+            </div>
+          )}
         </section>
       </div>
       <div

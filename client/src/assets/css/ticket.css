@@ -1,0 +1,19 @@
+.ticket {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+  height: 300px;
+  padding: 2rem;
+  border-radius: 10px;
+  justify-content: space-around;
+  align-items: center;
+
+  perspective: 1000px;
+  
+}
+
+.event-name {
+  font-size: 5rem;
+  font-weight: bold;
+}
