@@ -5,7 +5,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import './assets/css/index.css';
 import { HomePage } from './pages/home.page.tsx';
 import { BaseLayout } from './layouts/BaseLayout.tsx';
-import { Ticket } from './pages/ticket.page.tsx';
+import { TicketPage } from './pages/ticket.page.tsx';
 import { AuthPage } from './pages/auth.page.tsx';
 
 const router = createBrowserRouter([
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/ticket',
-        element: <Ticket />,
+        element: <TicketPage />,
       },
     ],
   },

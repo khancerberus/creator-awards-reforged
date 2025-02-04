@@ -1,8 +1,15 @@
 @import 'pixel-retroui/dist/index.css';
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap'); */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-SemiBold.ttf');
+  font-weight: 600;
+}
 
 :root {
   color-scheme: light dark;
@@ -27,6 +34,11 @@
   --shadow-accent: black;
 
   --neon-normal: #4d3bd9;
+}
+
+.montserrat-500 {
+  font-family: "Montserrat", serif;
+  font-style: normal;
 }
 
 html {

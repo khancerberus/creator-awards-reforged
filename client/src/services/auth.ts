@@ -1,10 +1,23 @@
-import { api } from '@/lib/api'
+import { api } from '@/lib/api';
+import { TwitchUserType } from '@/types/TwitchUser';
 
-const getToken = async ({ code }: { code: string }) => {
-    const response = await api.post('/auth/token', { code })
-    return response.data.token
-}
+const openSession = async ({ code }: { code: string }): Promise<TwitchUserType> => {
+  const response = await api.post('/auth/open-session', { code });
+  return response.data.user;
+};
+
+const closeSession = async (): Promise<string> => {
+  const response = await api.get('/auth/close-session');
+  return response.data.message;
+};
+
+const getSessionUser = async (): Promise<TwitchUserType> => {
+  const response = await api.get('/auth/user');
+  return response.data.user;
+};
 
 export const AuthService = {
-    getToken
-}
+  openSession,
+  closeSession,
+  getSessionUser,
+};

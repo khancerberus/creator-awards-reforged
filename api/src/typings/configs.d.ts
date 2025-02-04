@@ -1,5 +1,5 @@
-import { TwitchUserModel } from '../models/sequelize/TwitchUser'
+import { TwitchUserModel } from '../models/sequelize/twitchUsers';
 
 export interface CreateServerProps {
-    twitchUserModel: typeof TwitchUserModel
+    twitchUserModel: typeof TwitchUserModel;
 }

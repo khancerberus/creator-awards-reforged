@@ -16,12 +16,12 @@ const getToken = async ({ code }: { code: string }) => {
                 'Content-Type': 'application/json',
             },
         },
-    )
+    );
 
     return response.data;
 };
 
-const getUser = async ({ token, twitchId }: { token: string, twitchId: string }) => {
+const getUser = async ({ token, twitchId }: { token: string; twitchId: string }) => {
     const response = await axios.get('https://api.twitch.tv/helix/users', {
         headers: {
             'Client-ID': config().twitchClientId,
@@ -30,7 +30,7 @@ const getUser = async ({ token, twitchId }: { token: string, twitchId: string })
         params: {
             id: twitchId,
         },
-    })
+    });
     const twitchUserData = response.data?.data?.[0];
     return {
         twitchId: twitchUserData.id,
@@ -38,9 +38,9 @@ const getUser = async ({ token, twitchId }: { token: string, twitchId: string })
         displayName: twitchUserData.display_name,
         profileImageUrl: twitchUserData.profile_image_url,
     };
-}
+};
 
 export const TwitchAPIService = {
     getToken,
-    getUser
+    getUser,
 };
