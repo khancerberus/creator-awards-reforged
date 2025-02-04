@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.2.4...v0.3.0) (2025-02-04)
+
+
+### Features
+
+* add tickets semifinal version ([1ed7836](https://github.com/khancerberus/creator-awards-reforged/commit/1ed7836a6d154800440900e33e9b464bc468d55a))
+* implements new auth system ([1ed7836](https://github.com/khancerberus/creator-awards-reforged/commit/1ed7836a6d154800440900e33e9b464bc468d55a))
+
 ## [0.2.4](https://github.com/khancerberus/creator-awards-reforged/compare/v0.2.3...v0.2.4) (2025-01-29)
 
 
