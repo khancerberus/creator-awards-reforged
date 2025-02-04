@@ -22,6 +22,12 @@ services:
       - creator-awards-network
     volumes:
       - letsencrypt:/etc/letsencrypt
+  
+  redis:
+    image: redis:alpine
+    restart: always
+    networks:
+      - creator-awards-network
 
 networks:
   creator-awards-network:
