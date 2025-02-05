@@ -1,6 +1,7 @@
 import { Card } from 'pixel-retroui';
 import { useEffect, useState } from 'react';
 import { EVENT_TIMESTAMP } from '@/consts/event-date';
+import * as motion from 'motion/react-client';
 
 interface PanelProps {
   label: string;
@@ -40,7 +41,7 @@ const calculateCountdown = (timestamp: number): CountdownData => {
 
 const Panel = ({ label, value }: PanelProps) => {
   return (
-    <div className="flex flex-col items-center justify-center gap-2">
+    <motion.div drag className="flex flex-col items-center justify-center gap-2">
       <Card
         className="flex h-[8rem] w-[10rem] flex-col items-center justify-center gap-2"
         bg="black"
@@ -59,7 +60,7 @@ const Panel = ({ label, value }: PanelProps) => {
       <Card bg="black" textColor="white" shadowColor="#913ddb" borderColor="#7f61ff">
         <p className="text-xl">{label}</p>
       </Card>
-    </div>
+    </motion.div>
   );
 };
 
