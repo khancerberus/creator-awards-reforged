@@ -1,4 +1,5 @@
 import { Card } from 'pixel-retroui';
+import * as motion from 'motion/react-client';
 import { LoginButton } from '@/components/LoginButton';
 import { Countdown } from '@/components/Countdown';
 import { TicketButton } from '@/components/TicketButton';
@@ -11,7 +12,15 @@ export const HomePage = () => {
   return (
     <div className="home-page flex flex-col items-center justify-center">
       <section className="first-section flex min-h-screen flex-col items-center justify-center gap-10 pt-[10vh]">
-        <div className="flex flex-col items-center justify-center gap-10">
+        <motion.div
+          className="flex flex-col items-center justify-center gap-10"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 0.5,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
+        >
           <h1
             className="select-none text-[110px] font-bold"
             style={{
@@ -31,24 +40,33 @@ export const HomePage = () => {
             <span className="neon-animation">4</span>
           </h1>
           <Countdown />
-        </div>
+        </motion.div>
 
-        <Card
-          className="mt-10 flex flex-col items-center justify-center gap-4 p-2"
-          bg="black"
-          textColor="white"
-          shadowColor="#913ddb"
-          borderColor="#7f61ff"
-          style={{
-            filter: 'drop-shadow(0 0 15px #4d3bd9)',
-          }}
-        >
-          <div className="flex flex-col items-center justify-center gap-2">
-            <h2 className="text-2xl">¿Quieres participar?</h2>
-            <p>¡Obtén tu ticket aquí!</p>
-          </div>
-          {user ? <TicketButton /> : <LoginButton />}
-        </Card>
+        <motion.div 
+          initial={{ opacity: 0, y: 300 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.5,
+            delay: 0.5,
+            ease: [0, 0.71, 0.2, 1.01],}}
+            >
+          <Card
+            className="mt-10 flex flex-col items-center justify-center gap-4 p-2"
+            bg="black"
+            textColor="white"
+            shadowColor="#913ddb"
+            borderColor="#7f61ff"
+            style={{
+              filter: 'drop-shadow(0 0 15px #4d3bd9)',
+            }}
+          >
+            <div className="flex flex-col items-center justify-center gap-2">
+              <h2 className="text-2xl">¿Quieres participar?</h2>
+              <p>¡Obtén tu ticket aquí!</p>
+            </div>
+            {user ? <TicketButton /> : <LoginButton />}
+          </Card>
+        </motion.div>
       </section>
 
       <section

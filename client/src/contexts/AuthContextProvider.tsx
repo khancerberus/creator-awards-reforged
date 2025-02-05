@@ -20,7 +20,13 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
       })
       .catch((error) => {
         toast.warning('Inicio de sesión', { description: error.message });
-        navigate('/');
+        if (window.opener) {
+          window.opener.postMessage(
+            { error: 'No se ha podido iniciar sesión' },
+            window.location.origin,
+          );
+          window.close();
+        }
       });
   };
 
@@ -37,51 +43,67 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
   };
 
   const twitchLogin = (): void => {
-    const w = 600;
-    const h = 800;
-    const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screenX;
-    const dualScreenTop = window.screenTop !== undefined ? window.screenTop : window.screenY;
+    AuthService.getSessionUser()
+      .then((user) => {
+        setUser(user);
+      })
+      .catch((error) => {
+        console.log(error);
 
-    const width = window.innerWidth
-      ? window.innerWidth
-      : document.documentElement.clientWidth
-        ? document.documentElement.clientWidth
-        : screen.width;
+        const w = 600;
+        const h = 800;
+        const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screenX;
+        const dualScreenTop = window.screenTop !== undefined ? window.screenTop : window.screenY;
 
-    const height = window.innerHeight
-      ? window.innerHeight
-      : document.documentElement.clientHeight
-        ? document.documentElement.clientHeight
-        : screen.height;
+        const width = window.innerWidth
+          ? window.innerWidth
+          : document.documentElement.clientWidth
+            ? document.documentElement.clientWidth
+            : screen.width;
 
-    // Calcula la posición para centrar la ventana
-    const left = (width - w) / 2 + dualScreenLeft;
-    const top = (height - h) / 2 + dualScreenTop;
+        const height = window.innerHeight
+          ? window.innerHeight
+          : document.documentElement.clientHeight
+            ? document.documentElement.clientHeight
+            : screen.height;
 
-    const loginWindow = window.open(
-      REDIRECT_URL,
-      '_blank',
-      `scrollbars=yes, width=${w}, height=${h}, top=${top}, left=${left}`,
-    );
+        // Calcula la posición para centrar la ventana
+        const left = (width - w) / 2 + dualScreenLeft;
+        const top = (height - h) / 2 + dualScreenTop;
 
-    if (loginWindow) {
-      const messageListener = (event: MessageEvent) => {
-        if (event.origin === window.location.origin && event.data.user) {
-          setUser(event.data.user);
-          loginWindow.close();
-          clearInterval(checkWindowClosed); // Detiene el intervalo si el login fue exitoso
-          window.removeEventListener('message', messageListener);
+        const loginWindow = window.open(
+          REDIRECT_URL,
+          '_blank',
+          `scrollbars=yes, width=${w}, height=${h}, top=${top}, left=${left}`,
+        );
+
+        if (loginWindow) {
+          const messageListener = (event: MessageEvent) => {
+            if (event.origin === window.location.origin && event.data.user) {
+              setUser(event.data.user);
+              loginWindow.close();
+              clearInterval(checkWindowClosed); // Detiene el intervalo si el login fue exitoso
+              window.removeEventListener('message', messageListener);
+            }
+
+            if (event.origin == window.location.origin && event.data.error) {
+              toast.error('Inicio de sesión', { description: event.data.error });
+              loginWindow.close();
+              clearInterval(checkWindowClosed); // Detiene el intervalo si el login fue exitoso
+              window.removeEventListener('message', messageListener);
+              navigate('/');
+            }
+          };
+          window.addEventListener('message', messageListener);
+
+          const checkWindowClosed = setInterval(() => {
+            if (loginWindow.closed) {
+              clearInterval(checkWindowClosed);
+              window.removeEventListener('message', messageListener);
+            }
+          }, 500);
         }
-      };
-      window.addEventListener('message', messageListener);
-
-      const checkWindowClosed = setInterval(() => {
-        if (loginWindow.closed) {
-          clearInterval(checkWindowClosed);
-          window.removeEventListener('message', messageListener);
-        }
-      }, 500);
-    }
+      });
   };
 
   useEffect(() => {
