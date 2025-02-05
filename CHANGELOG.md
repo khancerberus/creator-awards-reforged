@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.3.0...v0.4.0) (2025-02-05)
+
+
+### Features
+
+* integrate motion library for enhanced animations in Countdown and Ticket pages ([f84bc88](https://github.com/khancerberus/creator-awards-reforged/commit/f84bc88d19d80abe36880da22ffbe653bd296fa0))
+
+
+### Bug Fixes
+
+* enhance authentication flow with error handling and messaging ([ad503d8](https://github.com/khancerberus/creator-awards-reforged/commit/ad503d87924cf49428ae41906514c795c0576528))
+
 ## [0.3.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.2.4...v0.3.0) (2025-02-04)
 
 
