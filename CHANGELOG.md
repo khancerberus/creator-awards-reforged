@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.5.2...v0.6.0) (2025-02-06)
+
+
+### Features
+
+* add ticket management and user reload functionality ([4016a2d](https://github.com/khancerberus/creator-awards-reforged/commit/4016a2dacd67ff0b97b3a1dbe3c2b1348524c658))
+
+
+### Bug Fixes
+
+* correct import statement formatting and enable StrictMode in main.tsx ([dff58c2](https://github.com/khancerberus/creator-awards-reforged/commit/dff58c2a41853ee084baa844cc7853492263e7a8))
+
 ## [0.5.2](https://github.com/khancerberus/creator-awards-reforged/compare/v0.5.1...v0.5.2) (2025-02-06)
 
 
