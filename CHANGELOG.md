@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2](https://github.com/khancerberus/creator-awards-reforged/compare/v0.5.1...v0.5.2) (2025-02-06)
+
+
+### Bug Fixes
+
+* add Redis URL configuration and update Redis client initialization ([4c70728](https://github.com/khancerberus/creator-awards-reforged/commit/4c707285c499cc9784ca89be10cf47ced9900ea5))
+
 ## [0.5.1](https://github.com/khancerberus/creator-awards-reforged/compare/v0.5.0...v0.5.1) (2025-02-06)
 
 
