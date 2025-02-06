@@ -53,7 +53,7 @@ html {
 }
 
 body {
-  background-image: url('bbblurry.svg');
+  background-image: url('/bbblurry.svg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
