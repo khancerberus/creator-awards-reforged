@@ -42,14 +42,15 @@ export const HomePage = () => {
           <Countdown />
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 300 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 0.5,
             delay: 0.5,
-            ease: [0, 0.71, 0.2, 1.01],}}
-            >
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
+        >
           <Card
             className="mt-10 flex flex-col items-center justify-center gap-4 p-2"
             bg="black"
