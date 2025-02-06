@@ -69,13 +69,13 @@ export const TicketPage = () => {
 
     mouseX.jump(currentMouseX);
     mouseY.jump(currentMouseY);
-  }
+  };
 
   const handleMouseLeave: MouseEventHandler = () => {
     scale.set(1);
     xPercentage.set(0);
     yPercentage.set(0);
-  }
+  };
 
   useEffect(() => {
     if (!user) twitchLogin();
@@ -87,7 +87,7 @@ export const TicketPage = () => {
       {user ? (
         <div className="flex flex-col items-center gap-10 text-center">
           <section className="flex flex-col items-center gap-5">
-            <h1 className="text-4xl text-[#]">Obten tu ticket!</h1>
+            <h1 className="text-4xl text-[#F7DFAE]">Obten tu ticket!</h1>
             <p>Y participa por un sorteo sorpresa del evento!</p>
             <p className="text-sm">Si eres suscriptor tienes más probabilidades de ganar.</p>
           </section>
@@ -96,11 +96,11 @@ export const TicketPage = () => {
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            initial={{ opacity: 0, scale: 0 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
-              duration: 0.4,
-              scale: { type: 'spring', visualDuration: 0.4, bounce: 0.5 },
+              duration: 0.3,
+              scale: { type: 'spring', visualDuration: 0.3, bounce: 0.2 },
             }}
             style={{
               transformStyle: 'preserve-3d',
@@ -108,15 +108,18 @@ export const TicketPage = () => {
               rotateY,
               scale,
             }}
-            className="relative shadow-lg overflow-hidden group rounded-lg"
+            className="group relative overflow-hidden rounded-lg shadow-lg"
           >
-            <motion.div className="absolute z-10 opacity-0 group-hover:opacity-30 transition-opacity duration-500 rounded-full blur-md" style={{
-              background: 'radial-gradient(white, #3984ff00 80%)',
-              left: sheenX,
-              top: sheenY,
-              height: sheenSize,
-              width: sheenSize,
-            }} />
+            <motion.div
+              className="absolute z-10 rounded-full opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-30"
+              style={{
+                background: 'radial-gradient(white, #3984ff00 80%)',
+                left: sheenX,
+                top: sheenY,
+                height: sheenSize,
+                width: sheenSize,
+              }}
+            />
             <div ref={ticketRef} className="-z-50">
               <Ticket />
             </div>
