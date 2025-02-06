@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.5.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.4.0...v0.5.0) (2025-02-06)
+
+
+### Features
+
+* add canvas-confetti for ticket saving celebration and enhance TicketPage layout ([19757e9](https://github.com/khancerberus/creator-awards-reforged/commit/19757e95ab8f2b2eeed7e3dd93a125938bdeeb89))
+* update user display in Navigator with profile image ([8ceab2e](https://github.com/khancerberus/creator-awards-reforged/commit/8ceab2e67ce7ee6fee607d529ef187ef0509981b))
+
+
+### Bug Fixes
+
+* improve formatting and adjust animation properties in TicketPage component ([1c74dc1](https://github.com/khancerberus/creator-awards-reforged/commit/1c74dc113cf51ae7133c3ce65cc3ad0f61b1e6c0))
+* update image paths in CSS files for correct loading ([70b4808](https://github.com/khancerberus/creator-awards-reforged/commit/70b480821778a0af2e7365d3ebffde66a841d279))
+
 ## [0.4.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.3.0...v0.4.0) (2025-02-05)
 
 
