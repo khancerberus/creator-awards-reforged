@@ -8,7 +8,10 @@ import { createClient } from 'redis';
 import session from 'express-session';
 import { RedisStore } from 'connect-redis';
 
-export const redisClient = createClient();
+console.log(config().redisUrl)
+export const redisClient = createClient({
+    url: config().redisUrl,
+});
 
 let tries = 0;
 const maxTries = 5;
