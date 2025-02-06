@@ -3,12 +3,10 @@ import http from 'node:http';
 import { config, middlewares, logger } from './config';
 import { createAuthRouter } from './routers/auth';
 import { CreateServerProps } from './typings/configs';
-import { createTwitchUsersRouter } from './routers/twitchUsers';
 import { createClient } from 'redis';
 import session from 'express-session';
 import { RedisStore } from 'connect-redis';
 import { createTicketRouter } from './routers/tickets';
-import { Tickets } from './models/sequelize/tickets';
 
 export const redisClient = createClient({
     url: config().redisUrl,
@@ -47,50 +45,8 @@ export const createServer = async ({ twitchUserModel }: CreateServerProps) => {
     );
 
     //region Middlewares
+    app.set('trust proxy', 1);
     app.use(middlewares.cors());
-    app.get('/ticket/:id', async (req, res, next) => {
-        try {
-            const ticketId = Number(req.params.id);
-            if (!ticketId) {
-                res.status(404).json({ message: 'Ticket not found' });
-                return;
-            }
-
-            const ticket = await Tickets.getById({ id: ticketId });
-            if (!ticket) {
-                res.status(404).json({ message: 'Ticket not found' });
-                return;
-            }
-
-            res.send(`
-                <html>
-                    <head>
-                        <meta property="og:title" content="Creator Awards Ticket" />
-                        <meta property="og:description" content="Este es tu ticket para los Creator Awards" />
-                        <meta property="og:image" content="${ticket.imageUrl}" />
-                        <meta property="og:url" content="https://awards.cotecreator.com" />
-                        <meta property="og:type" content="website" />
-
-                        <!-- Twitter Card Meta Tags -->
-                        <meta name="twitter:card" content="summary_large_image" />
-                        <meta name="twitter:title" content="Creator Awards Ticket" />
-                        <meta name="twitter:description" content="Este es tu ticket para los Creator Awards" />
-                        <meta name="twitter:image" content="${ticket.imageUrl}" />
-                        <meta name="twitter:url" content="https://awards.cotecreator.com" />
-
-                        <title>Creator Awards</title>
-                    </head>
-                    <body>
-                        <script>
-                            window.location.href = "https://awards.cotecreator.com";
-                        </script>
-                    </body>
-                </html>`);
-        } catch (error) {
-            next(error);
-        }
-    });
-
     app.use(middlewares.json());
     app.use(middlewares.httpLogger());
     app.use(
@@ -102,7 +58,7 @@ export const createServer = async ({ twitchUserModel }: CreateServerProps) => {
     //region Routes
     const baseRouter = Router();
     baseRouter.use('/auth', createAuthRouter({ twitchUserModel }));
-    baseRouter.use('/users', createTwitchUsersRouter({ twitchUserModel }));
+    // baseRouter.use('/users', createTwitchUsersRouter({ twitchUserModel }));
     baseRouter.use('/tickets', createTicketRouter({ twitchUserModel }));
     app.use(config().basePath, baseRouter);
 
