@@ -3,12 +3,10 @@ import http from 'node:http';
 import { config, middlewares, logger } from './config';
 import { createAuthRouter } from './routers/auth';
 import { CreateServerProps } from './typings/configs';
-import { createTwitchUsersRouter } from './routers/twitchUsers';
 import { createClient } from 'redis';
 import session from 'express-session';
 import { RedisStore } from 'connect-redis';
 import { createTicketRouter } from './routers/tickets';
-import { Tickets } from './models/sequelize/tickets';
 
 export const redisClient = createClient({
     url: config().redisUrl,
