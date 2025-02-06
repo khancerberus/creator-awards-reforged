@@ -60,7 +60,9 @@ export const Navigator = () => {
             <LoginButton />
           ) : (
             <div className="flex cursor-pointer items-center justify-center" onClick={logout}>
-              {user.displayName}
+              <div className="relative h-[60px] w-[60px] overflow-hidden rounded-full border-2 border-[#d8bd72]">
+                <img src={user?.profileImageUrl} alt="" />
+              </div>
             </div>
           )}
         </section>
