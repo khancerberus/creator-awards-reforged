@@ -16,8 +16,14 @@ const getSessionUser = async (): Promise<TwitchUserType> => {
   return response.data.user;
 };
 
+const reloadUser = async (): Promise<TwitchUserType> => {
+  const response = await api.get('/auth/user/reload');
+  return response.data.user;
+}
+
 export const AuthService = {
   openSession,
   closeSession,
   getSessionUser,
+  reloadUser
 };

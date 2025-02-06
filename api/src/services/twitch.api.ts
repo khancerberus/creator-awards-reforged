@@ -40,7 +40,39 @@ const getUser = async ({ token, twitchId }: { token: string; twitchId: string })
     };
 };
 
+const getSubStatus = async ({ token, userId }: { token: string; userId: string }) => {
+    try {
+        const response = await axios.get('https://api.twitch.tv/helix/subscriptions/user', {
+            headers: {
+                'Client-ID': config().twitchClientId,
+                Authorization: `Bearer ${token}`,
+            },
+            params: {
+                broadcaster_id: '78854566',
+                user_id: userId,
+            },
+        });
+        const subData = response.data?.data?.[0];
+        return {
+            isSub: true,
+            isGift: subData.is_gift,
+            tier: Number(subData.tier) / 1000,
+        };
+    } catch (error: any) {
+        if (error?.response?.status === 404) {
+            return {
+                isSub: false,
+                isGift: false,
+                tier: 0,
+            };
+        }
+
+        throw error;
+    }
+};
+
 export const TwitchAPIService = {
     getToken,
     getUser,
+    getSubStatus,
 };

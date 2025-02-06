@@ -6,24 +6,36 @@ import { Ticket } from '@/components/Ticket';
 import { useAuth } from '@/hooks/useAuth';
 import { Button, Card } from 'pixel-retroui';
 import { useSpring, useTransform } from 'motion/react';
-import { DownloadSimple, FloppyDisk } from '@phosphor-icons/react';
+import { DownloadSimple, Ticket as TicketIcon, TwitchLogo } from '@phosphor-icons/react';
 import { toast } from 'sonner';
 import confetti from 'canvas-confetti';
+import { TicketService } from '@/services/tickets';
 
+const width = 430;
+const height = 1080;
 const sheenSize = 500;
 
 export const TicketPage = () => {
   const ticketRef = useRef<HTMLDivElement>(null);
-  const { user, twitchLogin } = useAuth();
+  const { user, setUser } = useAuth();
   const [isParticipating, setIsParticipating] = useState(false);
 
-  const saveTicket = () => {
-    toast.success('Ticket guardado, estás participando en el sorteo!');
-    confetti({
-      particleCount: 150,
-      spread: 180,
-    });
-    setIsParticipating(!isParticipating);
+  const generateTicket = () => {
+    TicketService.generate()
+      .then((ticket) => {
+        if (!user) return;
+        console.log(user);
+        setUser({ ...user, ticket });
+        toast.success('Ticket guardado, estás participando en el sorteo!');
+        confetti({
+          particleCount: 150,
+          spread: 180,
+        });
+        setIsParticipating(true);
+      })
+      .catch((error) => {
+        toast.error('Error al generar ticket', { description: error.message });
+      });
   };
 
   const downloadTicket = async () => {
@@ -91,97 +103,114 @@ export const TicketPage = () => {
   };
 
   useEffect(() => {
-    if (!user) twitchLogin();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (user?.ticket?.id) {
+      setIsParticipating(true);
+    }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <div className="flex h-screen w-screen flex-col items-center pt-[15vh]">
-      {user ? (
-        <>
-          {!isParticipating ? (
-            <Card
-              className="flex max-w-[40rem] flex-col items-center gap-10 text-center p-5"
-              bg="black"
+      {!isParticipating ? (
+        <Card
+          className="flex max-w-[40rem] flex-col items-center gap-10 p-5 text-center"
+          bg="black"
+          textColor="white"
+          shadowColor="#913ddb"
+          borderColor="#7f61ff"
+        >
+          <h1 className="text-6xl text-[#F7DFAE]">Obtén tu ticket!</h1>
+          <p>
+            Participa por un sorteo sorpresa del evento! Si eres suscriptor tienes más
+            probabilidades de ganar.
+          </p>
+
+          <section className="flex gap-5">
+            <Button
+              bg="#913ddb"
               textColor="white"
-              shadowColor="#913ddb"
+              shadow="black"
               borderColor="#7f61ff"
+              onClick={() => {
+                window.open(
+                  'https://www.twitch.tv/subs/coteparrague',
+                  '_blank',
+                  `scrollbars=yes,width=${width},height=${height}`,
+                );
+              }}
+              className="flex items-center justify-center gap-2"
             >
-              <h1 className="text-6xl text-[#F7DFAE]">Obtén tu ticket!</h1>
-              <p>
-                Participa por un sorteo sorpresa del evento! Si eres suscriptor tienes más
-                probabilidades de ganar.
-              </p>
+              <TwitchLogo size={28} />
+              Suscribirse
+            </Button>
 
-              <Button
-                bg="#913ddb"
-                textColor="white"
-                shadow="black"
-                borderColor="#7f61ff"
-                onClick={saveTicket}
-                className="flex items-center justify-center gap-2"
-              >
-                <FloppyDisk size={28} />
-                Guardar Ticket
-              </Button>
-            </Card>
-          ) : (
-            <div className="flex flex-col items-center gap-10 text-center">
-              <motion.div
-                onMouseMove={handleMouseMove}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{
-                  duration: 0.3,
-                  scale: { type: 'spring', visualDuration: 0.3, bounce: 0.2 },
-                }}
-                style={{
-                  transformStyle: 'preserve-3d',
-                  // @ts-expect-error motionvalue can be used as a number
-                  rotateX,
-                  // @ts-expect-error motionvalue can be used as a number
-                  rotateY,
-                  // @ts-expect-error motionvalue can be used as a number
-                  scale,
-                }}
-                className="group relative overflow-hidden rounded-lg shadow-lg"
-              >
-                <motion.div
-                  className="absolute z-10 rounded-full opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-30"
-                  style={{
-                    background: 'radial-gradient(white, #3984ff00 80%)',
-                    // @ts-expect-error motionvalue can be used as a number
-                    left: sheenX,
-                    // @ts-expect-error motionvalue can be used as a number
-                    top: sheenY,
-                    height: sheenSize,
-                    width: sheenSize,
-                  }}
-                />
-                <div ref={ticketRef} className="-z-50">
-                  <Ticket />
-                </div>
-              </motion.div>
-
-              <section className="mt-10 flex gap-5">
-                <Button
-                  bg="#913ddb"
-                  textColor="white"
-                  shadow="black"
-                  borderColor="#7f61ff"
-                  onClick={downloadTicket}
-                  className="flex items-center justify-center gap-2"
-                >
-                  <DownloadSimple size={28} />
-                  Descargar
-                </Button>
-              </section>
-            </div>
-          )}
-        </>
+            <Button
+              bg="#913ddb"
+              textColor="white"
+              shadow="black"
+              borderColor="#7f61ff"
+              onClick={generateTicket}
+              className="flex items-center justify-center gap-2"
+            >
+              <TicketIcon size={28} />
+              Generar Ticket
+            </Button>
+          </section>
+        </Card>
       ) : (
-        <h1>Esperando a que inicies sesión...</h1>
+        <div className="flex flex-col items-center gap-10 text-center">
+          <motion.div
+            onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 0.3,
+              scale: { type: 'spring', visualDuration: 0.3, bounce: 0.2 },
+            }}
+            style={{
+              transformStyle: 'preserve-3d',
+              // @ts-expect-error motionvalue can be used as a number
+              rotateX,
+              // @ts-expect-error motionvalue can be used as a number
+              rotateY,
+              // @ts-expect-error motionvalue can be used as a number
+              scale,
+            }}
+            className="group relative overflow-hidden rounded-lg shadow-lg"
+          >
+            <motion.div
+              className="absolute z-10 rounded-full opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-30"
+              style={{
+                background: 'radial-gradient(white, #3984ff00 80%)',
+                // @ts-expect-error motionvalue can be used as a number
+                left: sheenX,
+                // @ts-expect-error motionvalue can be used as a number
+                top: sheenY,
+                height: sheenSize,
+                width: sheenSize,
+              }}
+            />
+            <div ref={ticketRef} className="-z-50">
+              <Ticket />
+            </div>
+          </motion.div>
+
+          <section className="mt-10 flex gap-5">
+            <Button
+              bg="#913ddb"
+              textColor="white"
+              shadow="black"
+              borderColor="#7f61ff"
+              onClick={downloadTicket}
+              className="flex items-center justify-center gap-2"
+            >
+              <DownloadSimple size={28} />
+              Descargar
+            </Button>
+          </section>
+        </div>
       )}
     </div>
   );

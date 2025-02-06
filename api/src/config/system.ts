@@ -9,6 +9,8 @@ const {
     TWITCH_REDIRECT_URI: twitchRedirectUri = 'http://localhost:3000/api/v1/auth/token',
     SESSION_SECRET: sessionSecret = 'secret',
     REDIS_URL: redisUrl = 'redis://localhost:6379',
+    SUPABASE_URL: supabaseUrl = 'example',
+    SUPABASE_KEY: supabaseKey = 'example',
 } = process.env;
 
 /**
@@ -35,5 +37,7 @@ export const config = () => ({
     twitchClientSecret,
     twitchRedirectUri,
     sessionSecret,
-    redisUrl
+    redisUrl,
+    supabaseUrl,
+    supabaseKey,
 });

@@ -10,16 +10,23 @@ import { useAuth } from '@/hooks/useAuth';
 interface ItemLinkProps {
   to: string;
   label: string;
+  disabled?: boolean;
 }
 
-const ItemLink = ({ to, label }: ItemLinkProps) => {
+const ItemLink = ({ to, label, disabled = false }: ItemLinkProps) => {
   return (
-    <Link
-      to={to}
-      className="flex items-center justify-center text-[#F7DFAE] transition-colors duration-200 hover:text-[#F88D3C]"
-    >
-      {label}
-    </Link>
+    <>
+      {disabled ? (
+        <div className="cursor-not-allowed text-gray-500">{label}</div>
+      ) : (
+        <Link
+          to={to}
+          className="flex items-center justify-center text-[#F7DFAE] transition-colors duration-200 hover:text-[#F88D3C]"
+        >
+          {label}
+        </Link>
+      )}
+    </>
   );
 };
 
@@ -51,7 +58,7 @@ export const Navigator = () => {
 
         <section className="flex w-[30rem] items-center justify-center gap-5">
           <ItemLink to="/ticket" label="Ticket" />
-          <ItemLink to="/vote" label="Votar" />
+          <ItemLink to="/vote" label="Votar" disabled />
           <ItemLink to="/#about" label="¿Qué es esto?" />
         </section>
 

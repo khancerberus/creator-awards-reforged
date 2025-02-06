@@ -12,7 +12,7 @@ export const Ticket = () => {
       <div className="absolute -bottom-5 -left-5 -z-30 w-[200px] rotate-12">
         <img src="/images/spyro.svg" alt="" className="h-full w-full opacity-50" />
       </div>
-      <div className="absolute left-5 top-5 text-xl">#001</div>
+      <div className="absolute left-5 top-5 text-xl">{'#' + String(user?.ticket?.id).padStart(3, '0')}</div>
 
       <div className="absolute bottom-5 right-5 text-nowrap text-[#d8bd72cc]">
         Sintoniza en twitch.tv/coteparrague
@@ -32,7 +32,9 @@ export const Ticket = () => {
           <img src={user?.profileImageUrl} alt="" />
         </div>
         <p className="text-2xl">{user?.displayName}</p>
-        <p className="rounded-full border border-[#dd88bbdd] px-2 text-sm">Special ticket</p>
+        {user?.ticket?.isSub && (
+          <p className="rounded-full border border-[#dd88bbdd] px-2 text-sm">Special ticket</p>
+        )}
       </div>
       <div
         className="top-50 absolute left-0 -z-20"

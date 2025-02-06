@@ -9,6 +9,7 @@ export const createAuthRouter = ({ twitchUserModel }: { twitchUserModel: typeof 
     router.post('/open-session', controller.openSession);
     router.get('/close-session', controller.closeSession);
     router.get('/user', controller.getSessionUser);
+    router.get('/user/reload', controller.reloadUser);
 
     return router;
 };
