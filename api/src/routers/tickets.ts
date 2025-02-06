@@ -1,6 +1,6 @@
-import { Router } from 'express'
-import { TwitchUserModel } from '../models/sequelize/twitchUsers'
-import { TicketController } from '../controllers/tickets'
+import { Router } from 'express';
+import { TwitchUserModel } from '../models/sequelize/twitchUsers';
+import { TicketController } from '../controllers/tickets';
 
 export const createTicketRouter = ({ twitchUserModel }: { twitchUserModel: typeof TwitchUserModel }) => {
     const router = Router();
@@ -8,6 +8,7 @@ export const createTicketRouter = ({ twitchUserModel }: { twitchUserModel: typeo
 
     router.post('/generate', controller.generate);
     router.post('/save-image', controller.saveImage);
+    router.get('/ticket/:id', controller.shareTicket);
 
     return router;
-}
+};
