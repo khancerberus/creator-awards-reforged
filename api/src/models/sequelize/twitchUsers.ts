@@ -1,6 +1,7 @@
 import { CreationOptional, DataTypes, Model } from 'sequelize';
 import { CreateTwitchUserType, TwitchUserType, UpdateTwitchUserType } from '../../typings/twitchUsers';
 import { sequelize } from '../../config/sequelize';
+import { Tickets } from './tickets'
 
 export class TwitchUserModel extends Model implements TwitchUserType {
     declare id: CreationOptional<string>;
@@ -9,6 +10,7 @@ export class TwitchUserModel extends Model implements TwitchUserType {
     declare email: string;
     declare displayName: string;
     declare profileImageUrl: string;
+    declare ticketId: CreationOptional<number>;
 
     static getById = async ({ id }: { id: string }): Promise<TwitchUserModel | null> => {
         return TwitchUserModel.findByPk(id);
@@ -92,3 +94,5 @@ TwitchUserModel.init(
         timestamps: true,
     },
 );
+
+TwitchUserModel.belongsTo(Tickets, { foreignKey: 'ticketId' });

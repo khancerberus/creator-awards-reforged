@@ -7,6 +7,8 @@ import { HomePage } from './pages/home.page.tsx';
 import { BaseLayout } from './layouts/BaseLayout.tsx';
 import { TicketPage } from './pages/ticket.page.tsx';
 import { AuthPage } from './pages/auth.page.tsx';
+import { PrivateRoutes } from './components/PrivateRoutes.tsx';
+import { VotePage } from './pages/vote.page.tsx';
 
 const router = createBrowserRouter([
   {
@@ -21,8 +23,17 @@ const router = createBrowserRouter([
         element: <AuthPage />,
       },
       {
-        path: '/ticket',
-        element: <TicketPage />,
+        element: <PrivateRoutes />,
+        children: [
+          {
+            path: '/ticket',
+            element: <TicketPage />,
+          },
+          {
+            path: '/vote',
+            element: <VotePage />,
+          },
+        ],
       },
     ],
   },
@@ -34,6 +45,6 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={router} />,
   </StrictMode>,
 );

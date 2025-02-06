@@ -106,6 +106,16 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
       });
   };
 
+  const reloadUser = () => {
+    AuthService.reloadUser()
+      .then((user) => {
+        setUser(user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   useEffect(() => {
     AuthService.getSessionUser()
       .then((user) => {
@@ -117,7 +127,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, setUser, login, logout, twitchLogin }}>
+    <AuthContext.Provider value={{ user, setUser, login, logout, twitchLogin, reloadUser }}>
       {children}
     </AuthContext.Provider>
   );

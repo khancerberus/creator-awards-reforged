@@ -7,6 +7,7 @@ export interface AuthContextType {
   login: (code: string) => void;
   logout: () => void;
   twitchLogin: () => void;
+  reloadUser: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);

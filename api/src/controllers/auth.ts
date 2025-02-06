@@ -1,6 +1,9 @@
 import { RequestHandler } from 'express';
 import { TwitchUserModel } from '../models/sequelize/twitchUsers';
 import { TwitchAPIService } from '../services/twitch.api';
+import { Tickets } from '../models/sequelize/tickets';
+import { sequelize } from '../config/sequelize';
+import { QueryTypes } from 'sequelize';
 
 interface AuthControllerProps {
     twitchUserModel: typeof TwitchUserModel;
@@ -8,9 +11,11 @@ interface AuthControllerProps {
 
 export class AuthController {
     declare twitchUserModel: typeof TwitchUserModel;
+    declare ticketModel: typeof Tickets;
 
     constructor({ twitchUserModel }: AuthControllerProps) {
         this.twitchUserModel = twitchUserModel;
+        this.ticketModel = Tickets;
     }
 
     openSession: RequestHandler = async (req, res, next) => {
@@ -52,6 +57,8 @@ export class AuthController {
                 }
             }
 
+            const ticket = await this.ticketModel.getById({ id: twitchUser.ticketId });
+
             req.session.regenerate((err) => {
                 if (err) return next(err);
 
@@ -60,11 +67,13 @@ export class AuthController {
 
                 req.session.save((err) => {
                     if (err) return next(err);
+
                     return res.status(201).json({
                         user: {
                             publicId: twitchUser.publicId,
                             displayName: twitchUser.displayName,
                             profileImageUrl: twitchUser.profileImageUrl,
+                            ticket,
                         },
                     });
                 });
@@ -104,11 +113,61 @@ export class AuthController {
                 return;
             }
 
+            const ticket = await this.ticketModel.getById({ id: user.ticketId });
+
             res.status(200).json({
                 user: {
                     publicId: user.publicId,
                     displayName: user.displayName,
                     profileImageUrl: user.profileImageUrl,
+                    ticket
+                },
+            });
+        } catch (error) {
+            next(error);
+        }
+    };
+
+    reloadUser: RequestHandler = async (req, res, next) => {
+        try {
+            const userID = req.session.userID;
+            if (!userID) {
+                res.status(404).json({ message: 'User not found' });
+                return;
+            }
+
+            const twitchAccessToken = req.session.twitchAccessToken;
+            if (!twitchAccessToken) {
+                res.status(404).json({ message: 'Access Token not found' });
+                return;
+            }
+
+            const twitchUser = await this.twitchUserModel.getByPublicId({ publicId: userID });
+            if (!twitchUser) {
+                res.status(404).json({ message: 'User not found' });
+                return;
+            }
+
+            const subStatus = await TwitchAPIService.getSubStatus({
+                token: twitchAccessToken,
+                userId: twitchUser.twitchId,
+            });
+
+            const result = (await sequelize.query(
+                `
+                SELECT nextval(pg_get_serial_sequence('TICKETS_id_seq', 'id'))
+              `,
+                { type: QueryTypes.SELECT },
+            )) as any[];
+
+            console.log(result[0].nextval);
+
+            res.status(200).json({
+                user: {
+                    publicId: twitchUser.publicId,
+                    displayName: twitchUser.displayName,
+                    profileImageUrl: twitchUser.profileImageUrl,
+                    ticket: twitchUser.ticketId,
                 },
             });
         } catch (error) {
