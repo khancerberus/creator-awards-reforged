@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/khancerberus/creator-awards-reforged/compare/v0.5.0...v0.5.1) (2025-02-06)
+
+
+### Bug Fixes
+
+* add container names for Redis, API, and Client services in docker-compose ([154e9c2](https://github.com/khancerberus/creator-awards-reforged/commit/154e9c23880a75416b24c5351e91ce783e7ab01b))
+
 ## [0.5.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.4.0...v0.5.0) (2025-02-06)
 
 
