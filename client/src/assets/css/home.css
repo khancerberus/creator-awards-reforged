@@ -5,7 +5,7 @@
   z-index: 2;
 }
 
-.first-section::before {
+/* .first-section::before {
   content: '';
   background-image: linear-gradient(to bottom, #1010164d, #10101680),
     linear-gradient(to bottom, #10101600 50%, #101016 90%), url('/images/logo.png');
@@ -20,7 +20,7 @@
   left: 0;
   scale:105%;
   animation: float 5s ease-in-out infinite;
-}
+} */
 
 @keyframes float {
   0% {
