@@ -3,6 +3,7 @@ import { Tickets } from '../models/sequelize/tickets';
 import { TwitchUserModel } from '../models/sequelize/twitchUsers';
 import { TwitchAPIService } from '../services/twitch.api';
 import { supabase } from '../config/supabaseS3';
+import { logger } from '../config';
 
 export class TicketController {
     declare ticketModel: typeof Tickets;
@@ -70,20 +71,24 @@ export class TicketController {
                 return;
             }
 
-            const image = req.body.image;
-            if (!image) {
+            const image = req.file?.buffer;
+            const contentType = req.file?.mimetype;
+            if (!image || !contentType) {
                 res.status(404).json({ message: 'Image not found' });
                 return;
             }
 
-            const fileName = `ticket-${ticket.id}.png`;
-            const { data, error } = await supabase.storage.from('tickets').upload(fileName, image);
-
+            const fileName = `ticket-${ticket.id}.jpg`;
+            const { error } = await supabase.storage.from('tickets').upload(fileName, image, {
+                cacheControl: '3600',
+                upsert: true,
+                contentType,
+            });
             if (error) {
+                logger.error(error);
                 res.status(500).json({ message: 'Error uploading image' });
                 return;
             }
-            console.log(data);
 
             const {
                 data: { publicUrl },
