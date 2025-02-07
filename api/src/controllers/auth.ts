@@ -28,10 +28,10 @@ export class AuthController {
             }
 
             // 2. Use the Twitch code to get the user's Twitch ID
-            const token = await TwitchAPIService.getToken({ code });
+            const tokenData = await TwitchAPIService.getToken({ code });
             const twitchUserData = await TwitchAPIService.getUser({
-                token: token.access_token,
-                twitchId: token.user_id,
+                token: tokenData.access_token,
+                twitchId: tokenData.user_id,
             });
             if (!twitchUserData) {
                 res.status(404).json({ message: 'User not found' });
@@ -63,7 +63,7 @@ export class AuthController {
                 if (err) return next(err);
 
                 req.session.userID = twitchUser.publicId;
-                req.session.twitchAccessToken = token.access_token;
+                req.session.twitchAccessToken = tokenData.access_token;
 
                 req.session.save((err) => {
                     if (err) return next(err);
