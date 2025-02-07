@@ -46,7 +46,7 @@ export const Navigator = () => {
   return (
     <nav
       className={classNames(
-        'absolute top-0 z-10 flex h-[15vh] w-full max-w-[1300px] flex-col items-center justify-center gap-2',
+        'sticky flex h-[15vh] w-full max-w-[1300px] flex-col items-center justify-center gap-2',
       )}
     >
       <div className="flex w-full max-w-[1000px] items-center justify-between">
