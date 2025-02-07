@@ -11,8 +11,8 @@ export const PrivateRoutes = () => {
   }, []);
 
   return (
-    <div className="flex h-screen w-screen flex-col items-center pt-[15vh]">
+    <>
       {user ? <Outlet /> : <h1 className="text-2xl">Esperando a que inicies sesión...</h1>}
-    </div>
+    </>
   );
 };
