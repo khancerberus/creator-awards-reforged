@@ -6,16 +6,26 @@ import { Ticket } from '@/components/Ticket';
 import { useAuth } from '@/hooks/useAuth';
 import { Button, Card } from 'pixel-retroui';
 import { useSpring, useTransform } from 'motion/react';
-import { DownloadSimple, Ticket as TicketIcon, TwitchLogo } from '@phosphor-icons/react';
+import {
+  DownloadSimple,
+  FloppyDisk,
+  ShareNetwork,
+  Ticket as TicketIcon,
+  TwitchLogo,
+} from '@phosphor-icons/react';
 import { toast } from 'sonner';
 import confetti from 'canvas-confetti';
 import { TicketService } from '@/services/tickets';
+import { base64ToBlob } from '@/utils/base64ToBlob';
+import { toJpeg } from 'html-to-image';
+import { useLocation } from 'react-router-dom';
 
 const width = 430;
 const height = 1080;
-const sheenSize = 500;
+const sheenSize = 1000;
 
 export const TicketPage = () => {
+  const location = useLocation();
   const ticketRef = useRef<HTMLDivElement>(null);
   const { user, setUser } = useAuth();
   const [isParticipating, setIsParticipating] = useState(false);
@@ -42,8 +52,9 @@ export const TicketPage = () => {
     if (!ticketRef.current) return;
 
     await document.fonts.ready;
-
-    const dataUrl = await domToImage.toPng(ticketRef.current);
+    const ticketDom = document.getElementById('ticket');
+    if (!ticketDom) return;
+    const dataUrl = await domToImage.toPng(ticketDom);
 
     const link = document.createElement('a');
     link.href = dataUrl;
@@ -102,6 +113,37 @@ export const TicketPage = () => {
     yPercentage.set(0);
   };
 
+  const shareTicket = () => {
+    if (!user?.ticket?.id) return;
+
+    window.open(
+      `https://twitter.com/intent/tweet?url=https://awards.cotecreator.com/api/v1/tickets/${user?.ticket?.id}&text=No te pierdas los Creator Awards!%0D%0A%0D%0ASomos creators!%0D%0A%0D%0A`,
+      '_blank',
+    );
+  };
+
+  const saveImageAndShare = async () => {
+    if (!ticketRef.current) return;
+
+    await document.fonts.ready;
+
+    const imageBase64 = await toJpeg(ticketRef.current, {
+      quality: 0.8,
+    });
+    const image = base64ToBlob(imageBase64, 'image/jpeg');
+
+    if (!user || !user?.ticket) return;
+
+    TicketService.saveImage({ image })
+      .then((imageUrl) => {
+        setUser({ ...user, ticket: { ...user.ticket, imageUrl } });
+        shareTicket();
+      })
+      .catch((error) => {
+        toast.error('Error al guardar imagen', { description: error.message });
+      });
+  };
+
   useEffect(() => {
     if (user?.ticket?.id) {
       setIsParticipating(true);
@@ -110,7 +152,7 @@ export const TicketPage = () => {
   }, []);
 
   return (
-    <div className="flex h-screen w-screen flex-col items-center pt-[15vh]">
+    <div className="flex flex-col items-center">
       {!isParticipating ? (
         <Card
           className="flex max-w-[40rem] flex-col items-center gap-10 p-5 text-center"
@@ -158,43 +200,69 @@ export const TicketPage = () => {
           </section>
         </Card>
       ) : (
-        <div className="flex flex-col items-center gap-10 text-center">
+        <div className="flex flex-col items-center gap-10 p-10 text-center">
+          <section className="flex w-[60rem] flex-col items-center gap-5">
+            <h2 className="text-4xl xl:text-6xl">¡Gracias por participar!</h2>
+            <p className="text-[#F7DFAE]">
+              Tendrás más chances de ganar si guardas y compartes tu ticket en redes sociales
+            </p>
+          </section>
+
           <motion.div
+            key={location.pathname}
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              duration: 0.3,
-              scale: { type: 'spring', visualDuration: 0.3, bounce: 0.2 },
-            }}
-            style={{
-              transformStyle: 'preserve-3d',
-              // @ts-expect-error motionvalue can be used as a number
-              rotateX,
-              // @ts-expect-error motionvalue can be used as a number
-              rotateY,
-              // @ts-expect-error motionvalue can be used as a number
-              scale,
-            }}
-            className="group relative overflow-hidden rounded-lg shadow-lg"
+            className="relative"
           >
             <motion.div
-              className="absolute z-10 rounded-full opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-30"
-              style={{
-                background: 'radial-gradient(white, #3984ff00 80%)',
-                // @ts-expect-error motionvalue can be used as a number
-                left: sheenX,
-                // @ts-expect-error motionvalue can be used as a number
-                top: sheenY,
-                height: sheenSize,
-                width: sheenSize,
-              }}
+              key={location.pathname}
+              className="absolute bottom-0 left-0 right-0 top-0 z-0 rounded-lg bg-black p-5 blur-xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
             />
-            <div ref={ticketRef} className="-z-50">
-              <Ticket />
-            </div>
+            <motion.div
+              key={location.pathname}
+              layout
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.3,
+                delay: 0.5,
+                scale: { type: 'spring', duration: 0.3, delay: 0.5 },
+              }}
+              style={{
+                transformStyle: 'preserve-3d',
+                // @ts-expect-error motionvalue can be used as a number
+                rotateX,
+                // @ts-expect-error motionvalue can be used as a number
+                rotateY,
+                // @ts-expect-error motionvalue can be used as a number
+                scale,
+                perspective: '1000px',
+                WebkitPerspective: '1000px',
+              }}
+              className="group relative overflow-hidden rounded-lg"
+            >
+              <motion.div
+                key={location.pathname}
+                className="absolute z-10 rounded-full opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-20"
+                style={{
+                  background: 'radial-gradient(white, #d8bd7255 60%, #fff0 70%)',
+                  // @ts-expect-error motionvalue can be used as a number
+                  left: sheenX,
+                  // @ts-expect-error motionvalue can be used as a number
+                  top: sheenY,
+                  height: sheenSize,
+                  width: sheenSize,
+                }}
+              />
+
+              <div ref={ticketRef} id="ticket">
+                <Ticket />
+              </div>
+            </motion.div>
           </motion.div>
 
           <section className="mt-10 flex gap-5">
@@ -209,6 +277,32 @@ export const TicketPage = () => {
               <DownloadSimple size={28} />
               Descargar
             </Button>
+
+            {user?.ticket?.imageUrl ? (
+              <Button
+                bg="#913ddb"
+                textColor="white"
+                shadow="black"
+                borderColor="#7f61ff"
+                onClick={shareTicket}
+                className="flex items-center justify-center gap-2"
+              >
+                <ShareNetwork size={28} />
+                Compartir
+              </Button>
+            ) : (
+              <Button
+                bg="#913ddb"
+                textColor="white"
+                shadow="black"
+                borderColor="#7f61ff"
+                onClick={saveImageAndShare}
+                className="flex items-center justify-center gap-2"
+              >
+                <FloppyDisk size={28} />
+                Guardar y compartir
+              </Button>
+            )}
           </section>
         </div>
       )}

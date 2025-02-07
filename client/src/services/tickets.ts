@@ -6,7 +6,7 @@ const generate = async (): Promise<TicketType> => {
   return response.data.ticket;
 };
 
-const saveImage = async ({ image }: { image: string | Blob }) => {
+const saveImage = async ({ image }: { image: Blob }): Promise<string> => {
   const formData = new FormData();
   formData.append('image', image);
 
@@ -15,7 +15,7 @@ const saveImage = async ({ image }: { image: string | Blob }) => {
       'Content-Type': 'multipart/form-data',
     },
   });
-  return response.data;
+  return response.data.imageUrl;
 };
 
 export const TicketService = {

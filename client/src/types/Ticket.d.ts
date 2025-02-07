@@ -1,7 +1,7 @@
 export interface TicketType {
-  id: number;
+  id?: number;
   imageUrl?: string;
-  isSub: boolean;
-  isGift: boolean;
-  tier: number;
+  isSub?: boolean;
+  isGift?: boolean;
+  tier?: number;
 }
