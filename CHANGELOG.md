@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.7.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.6.0...v0.7.0) (2025-02-06)
+
+
+### Features
+
+* add shareTicket method to TicketController and update router ([9123093](https://github.com/khancerberus/creator-awards-reforged/commit/91230939ef18ec2cc5a909671b6d5f21a5a62103))
+
+
+### Bug Fixes
+
+* add trust proxy setting and remove unused ticket route ([c872d2d](https://github.com/khancerberus/creator-awards-reforged/commit/c872d2d7c1526a9f290074192d26fc0d4fb1d441))
+* remove unused import for Twitch users router in app.ts ([ea1d6ad](https://github.com/khancerberus/creator-awards-reforged/commit/ea1d6ad5928ed6c955f7e380e933c06344b4b233))
+* update ticket route to use a dynamic parameter for sharing tickets ([df9c757](https://github.com/khancerberus/creator-awards-reforged/commit/df9c757ad9807379851582c42a41a402aa7faf1a))
+
 ## [0.6.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.5.2...v0.6.0) (2025-02-06)
 
 
