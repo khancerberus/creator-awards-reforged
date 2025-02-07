@@ -108,7 +108,7 @@ export class TicketController {
                 return;
             }
 
-            const ticket = await Tickets.getById({ id: ticketId });
+            const ticket = await this.ticketModel.getById({ id: ticketId });
             if (!ticket) {
                 res.status(404).json({ message: 'Ticket not found' });
                 return;
@@ -117,28 +117,26 @@ export class TicketController {
             res.send(`
                 <html>
                     <head>
-                        <meta property="og:title" content="Creator Awards Ticket" />
-                        <meta property="og:description" content="Este es tu ticket para los Creator Awards" />
+                        <meta http-equiv="refresh" content="0; url=https://awards.cotecreator.com" />
+                        <meta property="og:title" content="Creator Awards" />
+                        <meta property="og:description" content="Creator Awards - Premiación por y para creators de la comunidad" />
                         <meta property="og:image" content="${ticket.imageUrl}" />
                         <meta property="og:url" content="https://awards.cotecreator.com" />
                         <meta property="og:type" content="website" />
 
                         <!-- Twitter Card Meta Tags -->
                         <meta name="twitter:card" content="summary_large_image" />
-                        <meta name="twitter:title" content="Creator Awards Ticket" />
-                        <meta name="twitter:description" content="Este es tu ticket para los Creator Awards" />
+                        <meta name="twitter:title" content="Creator Awards" />
+                        <meta name="twitter:description" content="Creator Awards - Premiación por y para creators de la comunidad" />
                         <meta name="twitter:image" content="${ticket.imageUrl}" />
                         <meta name="twitter:url" content="https://awards.cotecreator.com" />
 
                         <title>Creator Awards</title>
                     </head>
                     <body>
-                        <script>
-                            window.location.href = "https://awards.cotecreator.com";
-                        </script>
                     </body>
-                </html>`
-            );
+                </html>
+            `);
         } catch (error) {
             next(error);
         }
