@@ -1,5 +1,6 @@
 import { useAuth } from '@/hooks/useAuth';
 import { useEffect } from 'react';
+import '@/assets/css/auth.css';
 
 export const AuthPage = () => {
   const { login } = useAuth();
@@ -12,5 +13,10 @@ export const AuthPage = () => {
     // eslint-disable-next-line
   }, []);
 
-  return <div></div>;
+  return (
+    <div className="flex h-screen w-screen flex-col items-center justify-center pt-[15vh] gap-10">
+      <div className="loader"></div>
+      No desesperes, estamos preparando tu sesión...
+    </div>
+  );
 };
