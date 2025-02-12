@@ -51,7 +51,7 @@ export const createServer = async ({ twitchUserModel }: CreateServerProps) => {
     app.use(middlewares.httpLogger());
     app.use(
         middlewares.isAuthenticated({
-            bypass: ['/api/v1/auth/open-session'],
+            bypass: ['/api/v1/auth/open-session', '/api/v1/tickets/:ticketId'],
         }),
     );
 

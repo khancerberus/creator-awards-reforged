@@ -53,7 +53,15 @@ const errorHandler = (): ErrorRequestHandler => (error, _req, res, next) => {
 
 const isAuthenticated = ({ bypass }: { bypass: string[] }): RequestHandler =>
     ((req, res, next) => {
-        if (bypass.includes(req.path)) {
+        const isPass = bypass.some((pattern) => {
+            if (pattern === req.path) return true; // Coincidencia exacta
+
+            // Convertimos los patrones dinámicos en expresiones regulares
+            const regex = new RegExp(`^${pattern.replace(/:([^/]+)/g, '[^/]+')}$`);
+            return regex.test(req.path);
+        });
+
+        if (isPass) {
             return next();
         }
 
