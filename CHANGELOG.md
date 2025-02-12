@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.8.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.7.0...v0.8.0) (2025-02-12)
+
+
+### Features
+
+* add base64ToBlob utility function for converting base64 strings to Blob objects ([cb2ae05](https://github.com/khancerberus/creator-awards-reforged/commit/cb2ae058879f9c8d7e17d1922280890ad8d535a5))
+* add close session button to the side of the logged user avatar image ([c63b05b](https://github.com/khancerberus/creator-awards-reforged/commit/c63b05b6329ec9294266e2d7e0c02b78a50bd7d0))
+* add Footer component and integrate it into HomePage ([e38bb0d](https://github.com/khancerberus/creator-awards-reforged/commit/e38bb0d1ccac1926e5764501bb6329eb19fa4635))
+* add html-to-image package and update TicketType to allow optional fields ([18844df](https://github.com/khancerberus/creator-awards-reforged/commit/18844dfab0a5d30314b2aff03c0fa9ef669018ce))
+* add loading animation to AuthPage with corresponding CSS styles ([73be696](https://github.com/khancerberus/creator-awards-reforged/commit/73be69649211015d4eb369117cd68403e6662e22))
+* add success toast notifications for user login and prevent multiple fetches on AuthPage ([98822a5](https://github.com/khancerberus/creator-awards-reforged/commit/98822a5ed2078630fef5410fc84c466986021af7))
+* add updateSub endpoint and corresponding service method for ticket updates ([fbc5731](https://github.com/khancerberus/creator-awards-reforged/commit/fbc5731901ef0feba13036ab715f063313d3d9e4))
+* enhance HomePage with animation on route change and update styling for better responsiveness ([c151181](https://github.com/khancerberus/creator-awards-reforged/commit/c151181e5fc9a5df0a4eb36dc9f82d04d159ebd4))
+
+
+### Bug Fixes
+
+* update AuthController to use tokenData for Twitch API calls ([167facd](https://github.com/khancerberus/creator-awards-reforged/commit/167facd1dccece09bf26f0df5de910160959aaad))
+* update TicketController to handle image uploads with multer and improve error logging ([df4f42a](https://github.com/khancerberus/creator-awards-reforged/commit/df4f42af2cea2cb20b8cc42298942c21c56b8a64))
+* update TicketController to use ticketModel and improve meta tags for Creator Awards ([9166270](https://github.com/khancerberus/creator-awards-reforged/commit/9166270ad73622b8fd48893ec7dac2e227e2c8a6))
+
 ## [0.7.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.6.0...v0.7.0) (2025-02-06)
 
 
