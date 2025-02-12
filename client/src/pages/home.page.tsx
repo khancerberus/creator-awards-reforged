@@ -7,6 +7,7 @@ import { useAuth } from '@/hooks/useAuth';
 import '@/assets/css/home.css';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Footer } from '@/components/Footer';
 
 export const HomePage = () => {
   const location = useLocation();
@@ -27,7 +28,7 @@ export const HomePage = () => {
   }, [location.pathname]); // Se ejecuta al cambiar de ruta
 
   return (
-    <div className="flex flex-col">
+    <div className="flex w-full flex-col">
       <section className="first-section flex h-[85vh] flex-col items-center justify-center gap-10">
         <motion.div
           key={location.pathname}
@@ -41,7 +42,7 @@ export const HomePage = () => {
             repeatType: 'reverse',
             ease: 'easeInOut',
             scale: { type: 'spring', delay: 0.5, duration: 3 },
-            opacity: { delay: 0.5, duration: 4 },
+            opacity: { delay: 0.5, duration: 4 }
           }}
         >
           <img src="/images/logo.png" alt="" className="w-full" />
@@ -54,7 +55,7 @@ export const HomePage = () => {
           animate={isLoaded && { opacity: 1, scale: 1 }}
           transition={{
             duration: 0.5,
-            ease: [0, 0.71, 0.2, 1.01],
+            ease: [0, 0.71, 0.2, 1.01]
           }}
         >
           <h1
@@ -62,7 +63,7 @@ export const HomePage = () => {
             style={{
               filter:
                 'drop-shadow(0 0 15px #101016) drop-shadow(0 0 15px #101016) drop-shadow(0 0 15px #101016)',
-              fontFamily: 'Gabriola',
+              fontFamily: 'Gabriola'
             }}
           >
             Creator Awards 202
@@ -79,7 +80,7 @@ export const HomePage = () => {
           transition={{
             duration: 0.5,
             delay: 0.5,
-            ease: [0, 0.71, 0.2, 1.01],
+            ease: [0, 0.71, 0.2, 1.01]
           }}
         >
           <Card
@@ -89,7 +90,7 @@ export const HomePage = () => {
             shadowColor="#913ddb"
             borderColor="#7f61ff"
             style={{
-              filter: 'drop-shadow(0 0 15px #4d3bd9)',
+              filter: 'drop-shadow(0 0 15px #4d3bd9)'
             }}
           >
             <div className="flex flex-col items-center justify-center gap-2">
@@ -115,7 +116,7 @@ export const HomePage = () => {
             <em
               className="text-5xl font-bold"
               style={{
-                fontFamily: 'Gabriola',
+                fontFamily: 'Gabriola'
               }}
             >
               Creator Awards
@@ -132,7 +133,7 @@ export const HomePage = () => {
         </div>
       </section>
 
-      <footer className="flex h-[20rem] w-screen bg-gradient-to-b from-[#101016] to-[#1f1f1f]"></footer>
+      <Footer />
     </div>
   );
 };
