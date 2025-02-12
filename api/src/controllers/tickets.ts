@@ -105,6 +105,47 @@ export class TicketController {
         }
     };
 
+    updateSub: RequestHandler = async (req, res, next) => {
+        try {
+            const twitchAccessToken = req.session.twitchAccessToken;
+            if (!twitchAccessToken) {
+                res.status(404).json({ message: 'Access Token not found' });
+                return;
+            }
+            const userID = req.session.userID;
+            if (!userID) {
+                res.status(401).json({ message: 'Unauthorized' });
+                return;
+            }
+
+            const twitchUser = await this.twitchUserModel.getByPublicId({ publicId: userID });
+            if (!twitchUser) {
+                res.status(404).json({ message: 'User not found' });
+                return;
+            }
+
+            const ticket = await this.ticketModel.getById({ id: twitchUser.ticketId });
+            if (!ticket) {
+                res.status(404).json({ message: 'Ticket not found' });
+                return;
+            }
+
+            const subStatus = await TwitchAPIService.getSubStatus({
+                token: twitchAccessToken,
+                userId: twitchUser.twitchId,
+            });
+
+            ticket.isSub = subStatus.isSub;
+            ticket.isGift = subStatus.isGift;
+            ticket.tier = subStatus.tier;
+            await ticket.save();
+
+            res.status(200).json({ ticket });
+        } catch (error) {
+            next(error);
+        }
+    };
+
     shareTicket: RequestHandler = async (req, res, next) => {
         try {
             const ticketId = Number(req.params.id);

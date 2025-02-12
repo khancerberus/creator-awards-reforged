@@ -18,7 +18,13 @@ const saveImage = async ({ image }: { image: Blob }): Promise<string> => {
   return response.data.imageUrl;
 };
 
+const updateSub = async (): Promise<TicketType> => {
+  const response = await api.put('/tickets/update-sub');
+  return response.data.ticket;
+}
+
 export const TicketService = {
   generate,
   saveImage,
+  updateSub
 };

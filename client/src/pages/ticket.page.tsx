@@ -7,11 +7,11 @@ import { useAuth } from '@/hooks/useAuth';
 import { Button, Card } from 'pixel-retroui';
 import { useSpring, useTransform } from 'motion/react';
 import {
+  CircleNotch,
   DownloadSimple,
-  FloppyDisk,
   ShareNetwork,
   Ticket as TicketIcon,
-  TwitchLogo,
+  TwitchLogo
 } from '@phosphor-icons/react';
 import { toast } from 'sonner';
 import confetti from 'canvas-confetti';
@@ -29,6 +29,7 @@ export const TicketPage = () => {
   const ticketRef = useRef<HTMLDivElement>(null);
   const { user, setUser } = useAuth();
   const [isParticipating, setIsParticipating] = useState(false);
+  const [isUploadingImg, setIsUploadingImg] = useState(false);
 
   const generateTicket = () => {
     TicketService.generate()
@@ -39,7 +40,7 @@ export const TicketPage = () => {
         toast.success('Ticket guardado, estás participando en el sorteo!');
         confetti({
           particleCount: 150,
-          spread: 180,
+          spread: 180
         });
         setIsParticipating(true);
       })
@@ -84,7 +85,7 @@ export const TicketPage = () => {
       currentMouseX,
       currentMouseY,
       containerWidth: width,
-      containerHeight: height,
+      containerHeight: height
     };
   };
 
@@ -117,36 +118,72 @@ export const TicketPage = () => {
     if (!user?.ticket?.id) return;
 
     window.open(
-      `https://twitter.com/intent/tweet?url=https://awards.cotecreator.com/api/v1/tickets/${user?.ticket?.id}&text=No te pierdas los Creator Awards!%0D%0A%0D%0ASomos creators!%0D%0A%0D%0A`,
-      '_blank',
+      `https://twitter.com/intent/tweet?url=https://awards.cotecreator.com/api/v1/tickets/${user?.ticket?.id}&text= 🚨 ALGO GRANDE ESTÁ PASANDO 🚨!%0D%0A%0D%0ALos Creator Awards están aquí… ¿Quién se llevará la gloria? 🏆✨%0D%0A%0D%0A`,
+      '_blank'
     );
   };
 
-  const saveImageAndShare = async () => {
+  const saveImage = async () => {
     if (!ticketRef.current) return;
+    setIsUploadingImg(true);
 
     await document.fonts.ready;
 
     const imageBase64 = await toJpeg(ticketRef.current, {
-      quality: 0.8,
+      quality: 0.8
     });
     const image = base64ToBlob(imageBase64, 'image/jpeg');
 
     if (!user || !user?.ticket) return;
 
-    TicketService.saveImage({ image })
-      .then((imageUrl) => {
-        setUser({ ...user, ticket: { ...user.ticket, imageUrl } });
-        shareTicket();
+    try {
+      const imageUrl = await TicketService.saveImage({ image });
+      setUser({ ...user, ticket: { ...user.ticket, imageUrl } });
+      toast.success('Imagen guardada correctamente');
+    } catch (error: unknown) {
+      if (error instanceof Error && 'response' in error) {
+        toast.error('Error al guardar imagen', {
+          description: (error as any).response.data.message
+        });
+      }
+    }
+
+    setIsUploadingImg(false);
+  };
+
+  const saveImageAndShare = async () => {
+    await saveImage();
+    shareTicket();
+  };
+
+  const updateSub = () => {
+    if (!user?.ticket?.id) return;
+
+    TicketService.updateSub()
+      .then((ticket) => {
+        if (
+          user.ticket?.isSub === ticket.isSub &&
+          user.ticket?.tier === ticket.tier &&
+          user.ticket?.isGift === ticket.isGift
+        ) {
+          toast.info('No ha habido cambios en tu suscripción');
+          return;
+        }
+        setUser({ ...user, ticket });
+        toast.success('Ticket actualizado con suscripción');
       })
-      .catch((error) => {
-        toast.error('Error al guardar imagen', { description: error.message });
+      .catch((error: Error) => {
+        toast.error('Error al actualizar ticket', { description: error.message });
       });
   };
 
   useEffect(() => {
     if (user?.ticket?.id) {
       setIsParticipating(true);
+
+      if (!user.ticket.isSub) {
+        updateSub();
+      }
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -177,7 +214,7 @@ export const TicketPage = () => {
                 window.open(
                   'https://www.twitch.tv/subs/coteparrague',
                   '_blank',
-                  `scrollbars=yes,width=${width},height=${height}`,
+                  `scrollbars=yes,width=${width},height=${height}`
                 );
               }}
               className="flex items-center justify-center gap-2"
@@ -203,9 +240,29 @@ export const TicketPage = () => {
         <div className="flex flex-col items-center gap-10 p-10 text-center">
           <section className="flex w-[60rem] flex-col items-center gap-5">
             <h2 className="text-4xl xl:text-6xl">¡Gracias por participar!</h2>
-            <p className="text-[#F7DFAE]">
-              Tendrás más chances de ganar si guardas y compartes tu ticket en redes sociales
-            </p>
+            {!user?.ticket?.imageUrl && (
+              <p className="text-[#F7DFAE]">
+                Tendrás más chances de ganar si guardas y compartes tu ticket en redes sociales
+              </p>
+            )}
+
+            {!user?.ticket?.isSub && (
+              <p>
+                Puedes suscribirte para tener más chances de ganar!{' '}
+                <span
+                  onClick={() => {
+                    window.open(
+                      'https://twitch.tv/subs/coteparrague',
+                      '_blank',
+                      `scrollbars=yes,width=${width},height=${height}`
+                    );
+                  }}
+                  className="cursor-pointer text-[#F7DFAE] transition-colors duration-200 hover:text-[#F88D3C]"
+                >
+                  Haz click aquí para suscribirte
+                </span>
+              </p>
+            )}
           </section>
 
           <motion.div
@@ -230,7 +287,7 @@ export const TicketPage = () => {
               transition={{
                 duration: 0.3,
                 delay: 0.5,
-                scale: { type: 'spring', duration: 0.3, delay: 0.5 },
+                scale: { type: 'spring', duration: 0.3, delay: 0.5 }
               }}
               style={{
                 transformStyle: 'preserve-3d',
@@ -241,7 +298,7 @@ export const TicketPage = () => {
                 // @ts-expect-error motionvalue can be used as a number
                 scale,
                 perspective: '1000px',
-                WebkitPerspective: '1000px',
+                WebkitPerspective: '1000px'
               }}
               className="group relative overflow-hidden rounded-lg"
             >
@@ -255,7 +312,7 @@ export const TicketPage = () => {
                   // @ts-expect-error motionvalue can be used as a number
                   top: sheenY,
                   height: sheenSize,
-                  width: sheenSize,
+                  width: sheenSize
                 }}
               />
 
@@ -266,6 +323,20 @@ export const TicketPage = () => {
           </motion.div>
 
           <section className="mt-10 flex gap-5">
+            {!user?.ticket?.isSub && (
+              <Button
+                bg="#913ddb"
+                textColor="white"
+                shadow="black"
+                borderColor="#7f61ff"
+                onClick={updateSub}
+                className="flex items-center justify-center gap-2"
+              >
+                <TwitchLogo size={28} />
+                Actualizar Sub en ticket
+              </Button>
+            )}
+
             <Button
               bg="#913ddb"
               textColor="white"
@@ -278,31 +349,22 @@ export const TicketPage = () => {
               Descargar
             </Button>
 
-            {user?.ticket?.imageUrl ? (
-              <Button
-                bg="#913ddb"
-                textColor="white"
-                shadow="black"
-                borderColor="#7f61ff"
-                onClick={shareTicket}
-                className="flex items-center justify-center gap-2"
-              >
+            <Button
+              bg={isUploadingImg ? '#692e9e' : '#913ddb'}
+              textColor="white"
+              shadow="black"
+              borderColor="#7f61ff"
+              onClick={saveImageAndShare}
+              className="flex items-center justify-center gap-2"
+              disabled={isUploadingImg}
+            >
+              {isUploadingImg ? (
+                <CircleNotch size={28} className="animate-spin" />
+              ) : (
                 <ShareNetwork size={28} />
-                Compartir
-              </Button>
-            ) : (
-              <Button
-                bg="#913ddb"
-                textColor="white"
-                shadow="black"
-                borderColor="#7f61ff"
-                onClick={saveImageAndShare}
-                className="flex items-center justify-center gap-2"
-              >
-                <FloppyDisk size={28} />
-                Guardar y compartir
-              </Button>
-            )}
+              )}
+              Compartir
+            </Button>
           </section>
         </div>
       )}

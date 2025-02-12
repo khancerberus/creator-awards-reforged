@@ -16,35 +16,35 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <HomePage />,
+        element: <HomePage />
       },
       {
         path: '/auth',
-        element: <AuthPage />,
+        element: <AuthPage />
       },
       {
         element: <PrivateRoutes />,
         children: [
           {
             path: '/ticket',
-            element: <TicketPage />,
+            element: <TicketPage />
           },
           {
             path: '/vote',
-            element: <VotePage />,
-          },
-        ],
-      },
-    ],
+            element: <VotePage />
+          }
+        ]
+      }
+    ]
   },
   {
     path: '*',
-    element: <Navigate to="/" />,
-  },
+    element: <Navigate to="/" />
+  }
 ]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />,
-  </StrictMode>,
+    <RouterProvider router={router} />
+  </StrictMode>
 );

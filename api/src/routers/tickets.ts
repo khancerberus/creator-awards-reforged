@@ -12,6 +12,7 @@ export const createTicketRouter = ({ twitchUserModel }: { twitchUserModel: typeo
     router.post('/generate', controller.generate);
     router.post('/save-image', upload.single('image'), controller.saveImage);
     router.get('/:id', controller.shareTicket);
+    router.put('/update-sub', controller.updateSub);
 
     return router;
 };
