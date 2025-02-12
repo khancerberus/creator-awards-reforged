@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/khancerberus/creator-awards-reforged/compare/v0.8.0...v0.8.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* add bypass for auth middleware ([d632ff3](https://github.com/khancerberus/creator-awards-reforged/commit/d632ff36ad61a2f64bdc39c29e8ccb6bd6753f11))
+
 ## [0.8.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.7.0...v0.8.0) (2025-02-12)
 
 
