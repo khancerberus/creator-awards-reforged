@@ -6,6 +6,8 @@ import '../assets/css/navigator.css';
 import { LoginButton } from './LoginButton';
 import { classNames } from 'primereact/utils';
 import { useAuth } from '@/hooks/useAuth';
+import { Button } from 'pixel-retroui';
+import { SignOut } from '@phosphor-icons/react';
 
 interface ItemLinkProps {
   to: string;
@@ -46,7 +48,7 @@ export const Navigator = () => {
   return (
     <nav
       className={classNames(
-        'sticky flex h-[15vh] w-full max-w-[1300px] flex-col items-center justify-center gap-2',
+        'sticky flex h-[15vh] w-full max-w-[1300px] flex-col items-center justify-center gap-2'
       )}
     >
       <div className="flex w-full max-w-[1000px] items-center justify-between">
@@ -66,10 +68,19 @@ export const Navigator = () => {
           {!user ? (
             <LoginButton />
           ) : (
-            <div className="flex cursor-pointer items-center justify-center" onClick={logout}>
+            <div className="flex items-center justify-center gap-5">
               <div className="relative h-[60px] w-[60px] overflow-hidden rounded-full border-2 border-[#d8bd72]">
                 <img src={user?.profileImageUrl} alt="" />
               </div>
+              <Button
+                onClick={logout}
+                bg="#E41E2E"
+                textColor="#F7DFAE"
+                borderColor="#88121b"
+                shadow="#5b0c12"
+              >
+                <SignOut size={20} weight="bold" />
+              </Button>
             </div>
           )}
         </section>
@@ -77,7 +88,7 @@ export const Navigator = () => {
       <div
         className="flex h-[2px] w-full"
         style={{
-          background: 'linear-gradient(90deg, #0000 10%, #F7DFAE 35% 65%, #0000 90%)',
+          background: 'linear-gradient(90deg, #0000 10%, #F7DFAE 35% 65%, #0000 90%)'
         }}
       ></div>
     </nav>
