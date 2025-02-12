@@ -3,6 +3,7 @@ import { Tickets } from '../models/sequelize/tickets';
 import { TwitchUserModel } from '../models/sequelize/twitchUsers';
 import { TwitchAPIService } from '../services/twitch.api';
 import { supabase } from '../config/supabaseS3';
+import { logger } from '../config';
 
 export class TicketController {
     declare ticketModel: typeof Tickets;
@@ -70,20 +71,24 @@ export class TicketController {
                 return;
             }
 
-            const image = req.body.image;
-            if (!image) {
+            const image = req.file?.buffer;
+            const contentType = req.file?.mimetype;
+            if (!image || !contentType) {
                 res.status(404).json({ message: 'Image not found' });
                 return;
             }
 
-            const fileName = `ticket-${ticket.id}.png`;
-            const { data, error } = await supabase.storage.from('tickets').upload(fileName, image);
-
+            const fileName = `ticket-${ticket.id}.jpg`;
+            const { error } = await supabase.storage.from('tickets').upload(fileName, image, {
+                cacheControl: '3600',
+                upsert: true,
+                contentType,
+            });
             if (error) {
+                logger.error(error);
                 res.status(500).json({ message: 'Error uploading image' });
                 return;
             }
-            console.log(data);
 
             const {
                 data: { publicUrl },
@@ -100,6 +105,47 @@ export class TicketController {
         }
     };
 
+    updateSub: RequestHandler = async (req, res, next) => {
+        try {
+            const twitchAccessToken = req.session.twitchAccessToken;
+            if (!twitchAccessToken) {
+                res.status(404).json({ message: 'Access Token not found' });
+                return;
+            }
+            const userID = req.session.userID;
+            if (!userID) {
+                res.status(401).json({ message: 'Unauthorized' });
+                return;
+            }
+
+            const twitchUser = await this.twitchUserModel.getByPublicId({ publicId: userID });
+            if (!twitchUser) {
+                res.status(404).json({ message: 'User not found' });
+                return;
+            }
+
+            const ticket = await this.ticketModel.getById({ id: twitchUser.ticketId });
+            if (!ticket) {
+                res.status(404).json({ message: 'Ticket not found' });
+                return;
+            }
+
+            const subStatus = await TwitchAPIService.getSubStatus({
+                token: twitchAccessToken,
+                userId: twitchUser.twitchId,
+            });
+
+            ticket.isSub = subStatus.isSub;
+            ticket.isGift = subStatus.isGift;
+            ticket.tier = subStatus.tier;
+            await ticket.save();
+
+            res.status(200).json({ ticket });
+        } catch (error) {
+            next(error);
+        }
+    };
+
     shareTicket: RequestHandler = async (req, res, next) => {
         try {
             const ticketId = Number(req.params.id);
@@ -108,7 +154,7 @@ export class TicketController {
                 return;
             }
 
-            const ticket = await Tickets.getById({ id: ticketId });
+            const ticket = await this.ticketModel.getById({ id: ticketId });
             if (!ticket) {
                 res.status(404).json({ message: 'Ticket not found' });
                 return;
@@ -117,28 +163,26 @@ export class TicketController {
             res.send(`
                 <html>
                     <head>
-                        <meta property="og:title" content="Creator Awards Ticket" />
-                        <meta property="og:description" content="Este es tu ticket para los Creator Awards" />
+                        <meta http-equiv="refresh" content="0; url=https://awards.cotecreator.com" />
+                        <meta property="og:title" content="Creator Awards" />
+                        <meta property="og:description" content="Creator Awards - Premiación por y para creators de la comunidad" />
                         <meta property="og:image" content="${ticket.imageUrl}" />
                         <meta property="og:url" content="https://awards.cotecreator.com" />
                         <meta property="og:type" content="website" />
 
                         <!-- Twitter Card Meta Tags -->
                         <meta name="twitter:card" content="summary_large_image" />
-                        <meta name="twitter:title" content="Creator Awards Ticket" />
-                        <meta name="twitter:description" content="Este es tu ticket para los Creator Awards" />
+                        <meta name="twitter:title" content="Creator Awards" />
+                        <meta name="twitter:description" content="Creator Awards - Premiación por y para creators de la comunidad" />
                         <meta name="twitter:image" content="${ticket.imageUrl}" />
                         <meta name="twitter:url" content="https://awards.cotecreator.com" />
 
                         <title>Creator Awards</title>
                     </head>
                     <body>
-                        <script>
-                            window.location.href = "https://awards.cotecreator.com";
-                        </script>
                     </body>
-                </html>`
-            );
+                </html>
+            `);
         } catch (error) {
             next(error);
         }

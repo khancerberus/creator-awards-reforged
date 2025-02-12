@@ -52,7 +52,7 @@ html {
   padding: 0;
 }
 
-body {
+:root {
   background-image: url('/bbblurry.svg');
   background-size: cover;
   background-position: center;

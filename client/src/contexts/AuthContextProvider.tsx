@@ -46,6 +46,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
     AuthService.getSessionUser()
       .then((user) => {
         setUser(user);
+        toast.success('Inicio de sesión', { description: 'Hola, creator!' });
       })
       .catch((error) => {
         console.log(error);
@@ -81,6 +82,8 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
           const messageListener = (event: MessageEvent) => {
             if (event.origin === window.location.origin && event.data.user) {
               setUser(event.data.user);
+              toast.success('Inicio de sesión', { description: 'Hola, creator!' });
+
               loginWindow.close();
               clearInterval(checkWindowClosed); // Detiene el intervalo si el login fue exitoso
               window.removeEventListener('message', messageListener);
@@ -114,7 +117,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
       .catch((error) => {
         console.error(error);
       });
-  }
+  };
 
   useEffect(() => {
     AuthService.getSessionUser()
