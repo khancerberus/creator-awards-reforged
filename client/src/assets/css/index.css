@@ -37,13 +37,12 @@
 }
 
 .montserrat-500 {
-  font-family: "Montserrat", serif;
+  font-family: 'Montserrat', serif;
   font-style: normal;
 }
 
 html {
   font-size: 14px;
-  scrollbar-gutter: stable;
 }
 
 * {
