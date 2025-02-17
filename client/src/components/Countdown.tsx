@@ -6,6 +6,7 @@ import * as motion from 'motion/react-client';
 interface PanelProps {
   label: string;
   value: string[];
+  constraintsRef: React.RefObject<HTMLDivElement>;
 }
 
 interface CountdownData {
@@ -39,9 +40,9 @@ const calculateCountdown = (timestamp: number): CountdownData => {
   return { days, hours, minutes, seconds };
 };
 
-const Panel = ({ label, value }: PanelProps) => {
+const Panel = ({ label, value, constraintsRef }: PanelProps) => {
   return (
-    <motion.div drag className="flex flex-col items-center justify-center gap-2">
+    <motion.div drag dragConstraints={constraintsRef} dragElastic={0.2} className="flex flex-col items-center justify-center gap-2">
       <Card
         className="flex h-[8rem] w-[10rem] flex-col items-center justify-center gap-2"
         bg="black"
@@ -64,7 +65,7 @@ const Panel = ({ label, value }: PanelProps) => {
   );
 };
 
-export const Countdown = () => {
+export const Countdown = ({ constraintsRef }: { constraintsRef: React.RefObject<HTMLDivElement> }) => {
   const [countdown, setCountdown] = useState<CountdownData>(calculateCountdown(EVENT_TIMESTAMP));
   const [completed, setCompleted] = useState(false);
 
@@ -91,10 +92,10 @@ export const Countdown = () => {
 
   return (
     <section className="flex gap-5">
-      <Panel label="Días" value={countdown.days} />
-      <Panel label="Horas" value={countdown.hours} />
-      <Panel label="Minutos" value={countdown.minutes} />
-      <Panel label="Segundos" value={countdown.seconds} />
+      <Panel label="Días" value={countdown.days} constraintsRef={constraintsRef} />
+      <Panel label="Horas" value={countdown.hours} constraintsRef={constraintsRef} />
+      <Panel label="Minutos" value={countdown.minutes} constraintsRef={constraintsRef} />
+      <Panel label="Segundos" value={countdown.seconds} constraintsRef={constraintsRef} />
     </section>
   );
 };

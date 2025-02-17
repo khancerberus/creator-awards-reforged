@@ -5,7 +5,7 @@ import { Countdown } from '@/components/Countdown';
 import { TicketButton } from '@/components/TicketButton';
 import { useAuth } from '@/hooks/useAuth';
 import '@/assets/css/home.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Footer } from '@/components/Footer';
 
@@ -13,6 +13,7 @@ export const HomePage = () => {
   const location = useLocation();
   const { user } = useAuth();
   const [isLoaded, setIsLoaded] = useState(false);
+  const constraintsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsLoaded(false); // Resetea la animación al cambiar de ruta
@@ -29,7 +30,7 @@ export const HomePage = () => {
 
   return (
     <div className="flex w-full flex-col">
-      <section className="first-section flex h-[85vh] flex-col items-center justify-center gap-10">
+      <motion.div ref={constraintsRef} className="first-section flex h-[85vh] flex-col items-center justify-center gap-10">
         <motion.div
           key={location.pathname}
           className="left-30 right-30 top-50 absolute -z-10"
@@ -71,7 +72,7 @@ export const HomePage = () => {
           </h1>
         </motion.div>
 
-        <Countdown />
+        <Countdown constraintsRef={constraintsRef} />
 
         <motion.div
           key={location.pathname}
@@ -100,7 +101,7 @@ export const HomePage = () => {
             {user ? <TicketButton /> : <LoginButton />}
           </Card>
         </motion.div>
-      </section>
+      </motion.div>
 
       <section
         id="about"
