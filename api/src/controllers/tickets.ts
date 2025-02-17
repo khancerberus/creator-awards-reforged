@@ -163,26 +163,23 @@ export class TicketController {
             res.send(`
                 <html>
                     <head>
+                        <meta http-equiv="refresh" content="0; url=https://awards.cotecreator.com" />
                         <meta property="og:title" content="Creator Awards" />
                         <meta property="og:description" content="Creator Awards - Premiación por y para creators de la comunidad" />
                         <meta property="og:image" content="${ticket.imageUrl}" />
                         <meta property="og:url" content="https://awards.cotecreator.com" />
                         <meta property="og:type" content="website" />
 
-                        <!-- Twitter Meta Tags -->
-                        <meta name="twitter:card" content="summary_large_image">
-                        <meta property="twitter:domain" content="awards.cotecreator.com">
-                        <meta property="twitter:url" content="https://awards.cotecreator.com/api/v1/tickets/${ticket.id}">
-                        <meta name="twitter:title" content="Creator Awards">
-                        <meta name="twitter:description" content="Creator Awards - Premiación por y para creators de la comunidad">
-                        <meta name="twitter:image" content="${ticket.imageUrl}"
+                        <!-- Twitter Card Meta Tags -->
+                        <meta name="twitter:card" content="summary_large_image" />
+                        <meta name="twitter:title" content="Creator Awards" />
+                        <meta name="twitter:description" content="Creator Awards - Premiación por y para creators de la comunidad" />
+                        <meta name="twitter:image" content="${ticket.imageUrl}" />
+                        <meta name="twitter:url" content="https://awards.cotecreator.com" />
 
                         <title>Creator Awards</title>
                     </head>
                     <body>
-                        <script>
-                            window.location.href = 'https://awards.cotecreator.com';
-                        </script>
                     </body>
                 </html>
             `);
