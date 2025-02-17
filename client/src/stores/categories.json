@@ -1,0 +1,538 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "title": "Categoria de prueba de clips con titulo largo",
+            "description": "Video Test description in english and spanish and some other languages",
+            "nominations": [
+                {
+                    "id": 1,
+                    "title": "fiesta kpop (final tragico)",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/MR8It07mPcIOiAWJKxdUCg/AT-cm%7CMR8It07mPcIOiAWJKxdUCg-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=FastCrispyCroissantPanicVis-TuY9wg6IBYkrF1QK"
+                },
+                {
+                    "id": 2,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/UcCw3cDaS2Tw0u4Ay1gkiw/AT-cm%7CUcCw3cDaS2Tw0u4Ay1gkiw-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=PlacidBloodySeahorseBabyRage-wNpLZPDS7gDLWCSL"
+                },
+                {
+                    "id": 3,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/9MuzkGhuD8Wea__cRPIAzg/AT-cm%7C9MuzkGhuD8Wea__cRPIAzg-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=UninterestedTallJaguarPeoplesChamp-aG4PxZ5r_9xE8gDO"
+                },
+                {
+                    "id": 4,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://static-cdn.jtvnw.net/twitch-clips-thumbnails-prod/SolidCourteousJackalVoteYea-S99tZpZY4LMh7ZIU/d412ea77-55d9-420e-9b36-599cdcb32a34/preview.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=SolidCourteousJackalVoteYea-S99tZpZY4LMh7ZIU"
+                }
+            ],
+            "votedNominations": [],
+            "maxVotes": 1
+        },
+        {
+            "id": 2,
+            "title": "Category 2",
+            "description": "Image test",
+            "nominations": [
+                {
+                    "id": 5,
+                    "title": "Cote Spyro",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/3.PNG",
+                    "src": "http://localhost:5173/images/votes/3.PNG"
+                },
+                {
+                    "id": 6,
+                    "title": "Bubupou",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/bubupou.PNG",
+                    "src": "http://localhost:5173/images/votes/bubupou.PNG"
+                },
+                {
+                    "id": 7,
+                    "title": "Cosplay",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/cos6.PNG",
+                    "src": "http://localhost:5173/images/votes/cos6.PNG"
+                },
+                {
+                    "id": 8,
+                    "title": "Cotepou",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/COTEPOU.PNG",
+                    "src": "http://localhost:5173/images/votes/COTEPOU.PNG"
+                }
+            ],
+            "votedNominations": [],
+            "maxVotes": 1
+        },
+        {
+            "id": 3,
+            "title": "Category 1",
+            "description": "Video Test",
+            "nominations": [
+                {
+                    "id": 9,
+                    "title": "fiesta kpop (final tragico)",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/MR8It07mPcIOiAWJKxdUCg/AT-cm%7CMR8It07mPcIOiAWJKxdUCg-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=FastCrispyCroissantPanicVis-TuY9wg6IBYkrF1QK"
+                },
+                {
+                    "id": 10,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/UcCw3cDaS2Tw0u4Ay1gkiw/AT-cm%7CUcCw3cDaS2Tw0u4Ay1gkiw-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=PlacidBloodySeahorseBabyRage-wNpLZPDS7gDLWCSL"
+                },
+                {
+                    "id": 11,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/9MuzkGhuD8Wea__cRPIAzg/AT-cm%7C9MuzkGhuD8Wea__cRPIAzg-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=UninterestedTallJaguarPeoplesChamp-aG4PxZ5r_9xE8gDO"
+                },
+                {
+                    "id": 12,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://static-cdn.jtvnw.net/twitch-clips-thumbnails-prod/SolidCourteousJackalVoteYea-S99tZpZY4LMh7ZIU/d412ea77-55d9-420e-9b36-599cdcb32a34/preview.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=SolidCourteousJackalVoteYea-S99tZpZY4LMh7ZIU"
+                }
+            ],
+            "votedNominations": [],
+            "maxVotes": 2
+        },
+        {
+            "id": 4,
+            "title": "Category 2",
+            "description": "Image test",
+            "nominations": [
+                {
+                    "id": 13,
+                    "title": "Cote Spyro",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/3.PNG",
+                    "src": "http://localhost:5173/images/votes/3.PNG"
+                },
+                {
+                    "id": 14,
+                    "title": "Bubupou",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/bubupou.PNG",
+                    "src": "http://localhost:5173/images/votes/bubupou.PNG"
+                },
+                {
+                    "id": 15,
+                    "title": "Cosplay",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/cos6.PNG",
+                    "src": "http://localhost:5173/images/votes/cos6.PNG"
+                },
+                {
+                    "id": 16,
+                    "title": "Cotepou",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/COTEPOU.PNG",
+                    "src": "http://localhost:5173/images/votes/COTEPOU.PNG"
+                }
+            ],
+            "votedNominations": [],
+            "maxVotes": 1
+        },
+        {
+            "id": 5,
+            "title": "Category 1",
+            "description": "Video Test",
+            "nominations": [
+                {
+                    "id": 17,
+                    "title": "fiesta kpop (final tragico)",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/MR8It07mPcIOiAWJKxdUCg/AT-cm%7CMR8It07mPcIOiAWJKxdUCg-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=FastCrispyCroissantPanicVis-TuY9wg6IBYkrF1QK"
+                },
+                {
+                    "id": 18,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/UcCw3cDaS2Tw0u4Ay1gkiw/AT-cm%7CUcCw3cDaS2Tw0u4Ay1gkiw-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=PlacidBloodySeahorseBabyRage-wNpLZPDS7gDLWCSL"
+                },
+                {
+                    "id": 19,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/9MuzkGhuD8Wea__cRPIAzg/AT-cm%7C9MuzkGhuD8Wea__cRPIAzg-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=UninterestedTallJaguarPeoplesChamp-aG4PxZ5r_9xE8gDO"
+                },
+                {
+                    "id": 20,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://static-cdn.jtvnw.net/twitch-clips-thumbnails-prod/SolidCourteousJackalVoteYea-S99tZpZY4LMh7ZIU/d412ea77-55d9-420e-9b36-599cdcb32a34/preview.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=SolidCourteousJackalVoteYea-S99tZpZY4LMh7ZIU"
+                }
+            ],
+            "votedNominations": [],
+            "maxVotes": 1
+        },
+        {
+            "id": 6,
+            "title": "Category 2",
+            "description": "Image test",
+            "nominations": [
+                {
+                    "id": 21,
+                    "title": "Cote Spyro",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/3.PNG",
+                    "src": "http://localhost:5173/images/votes/3.PNG"
+                },
+                {
+                    "id": 22,
+                    "title": "Bubupou",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/bubupou.PNG",
+                    "src": "http://localhost:5173/images/votes/bubupou.PNG"
+                },
+                {
+                    "id": 23,
+                    "title": "Cosplay",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/cos6.PNG",
+                    "src": "http://localhost:5173/images/votes/cos6.PNG"
+                },
+                {
+                    "id": 24,
+                    "title": "Cotepou",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/COTEPOU.PNG",
+                    "src": "http://localhost:5173/images/votes/COTEPOU.PNG"
+                }
+            ],
+            "votedNominations": [],
+            "maxVotes": 1
+        },
+        {
+            "id": 7,
+            "title": "Category 1",
+            "description": "Video Test",
+            "nominations": [
+                {
+                    "id": 25,
+                    "title": "fiesta kpop (final tragico)",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/MR8It07mPcIOiAWJKxdUCg/AT-cm%7CMR8It07mPcIOiAWJKxdUCg-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=FastCrispyCroissantPanicVis-TuY9wg6IBYkrF1QK"
+                },
+                {
+                    "id": 26,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/UcCw3cDaS2Tw0u4Ay1gkiw/AT-cm%7CUcCw3cDaS2Tw0u4Ay1gkiw-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=PlacidBloodySeahorseBabyRage-wNpLZPDS7gDLWCSL"
+                },
+                {
+                    "id": 27,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/9MuzkGhuD8Wea__cRPIAzg/AT-cm%7C9MuzkGhuD8Wea__cRPIAzg-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=UninterestedTallJaguarPeoplesChamp-aG4PxZ5r_9xE8gDO"
+                },
+                {
+                    "id": 28,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://static-cdn.jtvnw.net/twitch-clips-thumbnails-prod/SolidCourteousJackalVoteYea-S99tZpZY4LMh7ZIU/d412ea77-55d9-420e-9b36-599cdcb32a34/preview.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=SolidCourteousJackalVoteYea-S99tZpZY4LMh7ZIU"
+                }
+            ],
+            "votedNominations": [],
+            "maxVotes": 1
+        },
+        {
+            "id": 8,
+            "title": "Category 2",
+            "description": "Image test",
+            "nominations": [
+                {
+                    "id": 29,
+                    "title": "Cote Spyro",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/3.PNG",
+                    "src": "http://localhost:5173/images/votes/3.PNG"
+                },
+                {
+                    "id": 30,
+                    "title": "Bubupou",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/bubupou.PNG",
+                    "src": "http://localhost:5173/images/votes/bubupou.PNG"
+                },
+                {
+                    "id": 31,
+                    "title": "Cosplay",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/cos6.PNG",
+                    "src": "http://localhost:5173/images/votes/cos6.PNG"
+                },
+                {
+                    "id": 32,
+                    "title": "Cotepou",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/COTEPOU.PNG",
+                    "src": "http://localhost:5173/images/votes/COTEPOU.PNG"
+                }
+            ],
+            "votedNominations": [],
+            "maxVotes": 1
+        },
+        {
+            "id": 9,
+            "title": "Category 1",
+            "description": "Video Test",
+            "nominations": [
+                {
+                    "id": 33,
+                    "title": "fiesta kpop (final tragico)",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/MR8It07mPcIOiAWJKxdUCg/AT-cm%7CMR8It07mPcIOiAWJKxdUCg-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=FastCrispyCroissantPanicVis-TuY9wg6IBYkrF1QK"
+                },
+                {
+                    "id": 34,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/UcCw3cDaS2Tw0u4Ay1gkiw/AT-cm%7CUcCw3cDaS2Tw0u4Ay1gkiw-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=PlacidBloodySeahorseBabyRage-wNpLZPDS7gDLWCSL"
+                },
+                {
+                    "id": 35,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/9MuzkGhuD8Wea__cRPIAzg/AT-cm%7C9MuzkGhuD8Wea__cRPIAzg-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=UninterestedTallJaguarPeoplesChamp-aG4PxZ5r_9xE8gDO"
+                },
+                {
+                    "id": 36,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://static-cdn.jtvnw.net/twitch-clips-thumbnails-prod/SolidCourteousJackalVoteYea-S99tZpZY4LMh7ZIU/d412ea77-55d9-420e-9b36-599cdcb32a34/preview.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=SolidCourteousJackalVoteYea-S99tZpZY4LMh7ZIU"
+                }
+            ],
+            "votedNominations": [],
+            "maxVotes": 1
+        },
+        {
+            "id": 10,
+            "title": "Category 2",
+            "description": "Image test",
+            "nominations": [
+                {
+                    "id": 37,
+                    "title": "Cote Spyro",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/3.PNG",
+                    "src": "http://localhost:5173/images/votes/3.PNG"
+                },
+                {
+                    "id": 38,
+                    "title": "Bubupou",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/bubupou.PNG",
+                    "src": "http://localhost:5173/images/votes/bubupou.PNG"
+                },
+                {
+                    "id": 39,
+                    "title": "Cosplay",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/cos6.PNG",
+                    "src": "http://localhost:5173/images/votes/cos6.PNG"
+                },
+                {
+                    "id": 40,
+                    "title": "Cotepou",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/COTEPOU.PNG",
+                    "src": "http://localhost:5173/images/votes/COTEPOU.PNG"
+                }
+            ],
+            "votedNominations": [],
+            "maxVotes": 1
+        },
+        {
+            "id": 11,
+            "title": "Category 1",
+            "description": "Video Test",
+            "nominations": [
+                {
+                    "id": 41,
+                    "title": "fiesta kpop (final tragico)",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/MR8It07mPcIOiAWJKxdUCg/AT-cm%7CMR8It07mPcIOiAWJKxdUCg-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=FastCrispyCroissantPanicVis-TuY9wg6IBYkrF1QK"
+                },
+                {
+                    "id": 42,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/UcCw3cDaS2Tw0u4Ay1gkiw/AT-cm%7CUcCw3cDaS2Tw0u4Ay1gkiw-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=PlacidBloodySeahorseBabyRage-wNpLZPDS7gDLWCSL"
+                },
+                {
+                    "id": 43,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://clips-media-assets2.twitch.tv/9MuzkGhuD8Wea__cRPIAzg/AT-cm%7C9MuzkGhuD8Wea__cRPIAzg-preview-480x272.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=UninterestedTallJaguarPeoplesChamp-aG4PxZ5r_9xE8gDO"
+                },
+                {
+                    "id": 44,
+                    "title": "Nomitation 1",
+                    "description": "Description 1",
+                    "type": 1,
+                    "preview": "https://static-cdn.jtvnw.net/twitch-clips-thumbnails-prod/SolidCourteousJackalVoteYea-S99tZpZY4LMh7ZIU/d412ea77-55d9-420e-9b36-599cdcb32a34/preview.jpg",
+                    "src": "https://clips.twitch.tv/embed?clip=SolidCourteousJackalVoteYea-S99tZpZY4LMh7ZIU"
+                }
+            ],
+            "votedNominations": [],
+            "maxVotes": 1
+        },
+        {
+            "id": 12,
+            "title": "Category 2",
+            "description": "Image test",
+            "nominations": [
+                {
+                    "id": 45,
+                    "title": "Cote Spyro",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/3.PNG",
+                    "src": "http://localhost:5173/images/votes/3.PNG"
+                },
+                {
+                    "id": 46,
+                    "title": "Bubupou",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/bubupou.PNG",
+                    "src": "http://localhost:5173/images/votes/bubupou.PNG"
+                },
+                {
+                    "id": 47,
+                    "title": "Cosplay",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/cos6.PNG",
+                    "src": "http://localhost:5173/images/votes/cos6.PNG"
+                },
+                {
+                    "id": 48,
+                    "title": "Cotepou",
+                    "description": "Description 1",
+                    "type": 2,
+                    "preview": "http://localhost:5173/images/votes/COTEPOU.PNG",
+                    "src": "http://localhost:5173/images/votes/COTEPOU.PNG"
+                }
+            ],
+            "votedNominations": [],
+            "maxVotes": 1
+        },
+        
+        {
+            "id": 13,
+            "title": "Categoria de audios",
+            "description": "Audios locos",
+            "nominations": [
+                {
+                    "id": 49,
+                    "title": "Audio 1",
+                    "description": "Description 1",
+                    "type": 3,
+                    "preview": "https://clips-media-assets2.twitch.tv/MR8It07mPcIOiAWJKxdUCg/AT-cm%7CMR8It07mPcIOiAWJKxdUCg-preview-480x272.jpg",
+                    "src": "http://localhost:5173/audios/platanos.mp3"
+                },
+                {
+                    "id": 50,
+                    "title": "Audio 1",
+                    "description": "Description 1",
+                    "type": 3,
+                    "preview": "https://clips-media-assets2.twitch.tv/UcCw3cDaS2Tw0u4Ay1gkiw/AT-cm%7CUcCw3cDaS2Tw0u4Ay1gkiw-preview-480x272.jpg",
+                    "src": "http://localhost:5173/audios/platanos.mp3"
+                },
+                {
+                    "id": 51,
+                    "title": "Audio 1",
+                    "description": "Description 1",
+                    "type": 3,
+                    "preview": "https://clips-media-assets2.twitch.tv/9MuzkGhuD8Wea__cRPIAzg/AT-cm%7C9MuzkGhuD8Wea__cRPIAzg-preview-480x272.jpg",
+                    "src": "http://localhost:5173/audios/platanos.mp3"
+                },
+                {
+                    "id": 52,
+                    "title": "Audio 1",
+                    "description": "Description 1",
+                    "type": 3,
+                    "preview": "https://static-cdn.jtvnw.net/twitch-clips-thumbnails-prod/SolidCourteousJackalVoteYea-S99tZpZY4LMh7ZIU/d412ea77-55d9-420e-9b36-599cdcb32a34/preview.jpg",
+                    "src": "http://localhost:5173/audios/platanos.mp3"
+                }
+            ],
+            "votedNominations": [],
+            "maxVotes": 1
+        }
+    ]
+}

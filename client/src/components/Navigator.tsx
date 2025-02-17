@@ -60,7 +60,7 @@ export const Navigator = () => {
 
         <section className="flex w-[30rem] items-center justify-center gap-5">
           <ItemLink to="/ticket" label="Ticket" />
-          <ItemLink to="/vote" label="Votar" disabled />
+          <ItemLink to="/vote" label="Votar" />
           <ItemLink to="/#about" label="¿Qué es esto?" />
         </section>
 
