@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/khancerberus/creator-awards-reforged/compare/v0.8.1...v0.9.0) (2025-02-17)
+
+
+### Features
+
+* add drag constraints to Countdown component ([5056ba9](https://github.com/khancerberus/creator-awards-reforged/commit/5056ba9a97556015bd88829d56e756ec01220169))
+
 ## [0.8.1](https://github.com/khancerberus/creator-awards-reforged/compare/v0.8.0...v0.8.1) (2025-02-12)
 
 
