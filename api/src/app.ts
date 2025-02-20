@@ -1,5 +1,6 @@
 import express, { Router } from 'express';
 import http from 'node:http';
+import './config/initDatabase';
 import { config, middlewares, logger } from './config';
 import { createAuthRouter } from './routers/auth';
 import { CreateServerProps } from './typings/configs';
@@ -7,6 +8,7 @@ import { createClient } from 'redis';
 import session from 'express-session';
 import { RedisStore } from 'connect-redis';
 import { createTicketRouter } from './routers/tickets';
+import { createVoteSystemRouter } from './routers/voteSystem';
 
 export const redisClient = createClient({
     url: config().redisUrl,
@@ -60,6 +62,7 @@ export const createServer = async ({ twitchUserModel }: CreateServerProps) => {
     baseRouter.use('/auth', createAuthRouter({ twitchUserModel }));
     // baseRouter.use('/users', createTwitchUsersRouter({ twitchUserModel }));
     baseRouter.use('/tickets', createTicketRouter({ twitchUserModel }));
+    baseRouter.use('/vote-system', createVoteSystemRouter({ twitchUserModel }));
     app.use(config().basePath, baseRouter);
 
     //region Error Handlers

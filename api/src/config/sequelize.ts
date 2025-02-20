@@ -12,12 +12,3 @@ export const sequelize = new Sequelize(config().dbUri, {
         idle: 10000,
     },
 });
-
-(async () => {
-    try {
-        await sequelize.authenticate();
-        await sequelize.sync();
-    } catch (error) {
-        logger.error('Unable to connect to the database:', error);
-    }
-})();
