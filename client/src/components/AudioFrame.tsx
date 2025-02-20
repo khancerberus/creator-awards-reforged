@@ -45,7 +45,7 @@ export const AudioFrame = ({
           transition={{ duration: 0.2 }}
           className="absolute bottom-1 left-1 z-20"
         >
-          <div className="bg-black bg-opacity-70 text-xl text-white">{nomination.title}</div>
+          <div className="bg-black bg-opacity-70 px-2 text-xl text-white">{nomination.title}</div>
         </motion.div>
 
         <div className="flex flex-col items-center justify-center text-nowrap">

@@ -19,6 +19,7 @@ import { TicketService } from '@/services/tickets';
 import { base64ToBlob } from '@/utils/base64ToBlob';
 import { toJpeg } from 'html-to-image';
 import { useLocation } from 'react-router-dom';
+import { DefaultButton } from '@/components/DefaultButton';
 
 const width = 430;
 const height = 1080;
@@ -177,6 +178,14 @@ export const TicketPage = () => {
       });
   };
 
+  const openSubsWindow = () => {
+    window.open(
+      'https://www.twitch.tv/subs/coteparrague',
+      '_blank',
+      `scrollbars=yes,width=${width},height=${height}`
+    );
+  };
+
   useEffect(() => {
     if (user?.ticket?.id) {
       setIsParticipating(true);
@@ -205,35 +214,15 @@ export const TicketPage = () => {
           </p>
 
           <section className="flex gap-5">
-            <Button
-              bg="#913ddb"
-              textColor="white"
-              shadow="black"
-              borderColor="#7f61ff"
-              onClick={() => {
-                window.open(
-                  'https://www.twitch.tv/subs/coteparrague',
-                  '_blank',
-                  `scrollbars=yes,width=${width},height=${height}`
-                );
-              }}
-              className="flex items-center justify-center gap-2"
-            >
-              <TwitchLogo size={28} />
+            <DefaultButton onClick={openSubsWindow}>
+              <TwitchLogo size={28} weight="bold" />
               Suscribirse
-            </Button>
+            </DefaultButton>
 
-            <Button
-              bg="#913ddb"
-              textColor="white"
-              shadow="black"
-              borderColor="#7f61ff"
-              onClick={generateTicket}
-              className="flex items-center justify-center gap-2"
-            >
-              <TicketIcon size={28} />
+            <DefaultButton onClick={generateTicket}>
+              <TicketIcon size={28} weight="bold" />
               Generar Ticket
-            </Button>
+            </DefaultButton>
           </section>
         </Card>
       ) : (
@@ -337,34 +326,23 @@ export const TicketPage = () => {
               </Button>
             )}
 
-            <Button
-              bg="#913ddb"
-              textColor="white"
-              shadow="black"
-              borderColor="#7f61ff"
-              onClick={downloadTicket}
-              className="flex items-center justify-center gap-2"
-            >
-              <DownloadSimple size={28} />
+            <DefaultButton onClick={downloadTicket}>
+              <DownloadSimple size={28} weight="bold" />
               Descargar
-            </Button>
+            </DefaultButton>
 
-            <Button
-              bg={isUploadingImg ? '#692e9e' : '#913ddb'}
-              textColor="white"
-              shadow="black"
-              borderColor="#7f61ff"
+            <DefaultButton
+              className={isUploadingImg ? 'bg-[#692e9e]' : 'bg-[#913ddb]'}
               onClick={saveImageAndShare}
-              className="flex items-center justify-center gap-2"
               disabled={isUploadingImg}
             >
               {isUploadingImg ? (
-                <CircleNotch size={28} className="animate-spin" />
+                <CircleNotch size={28} className="animate-spin" weight="bold" />
               ) : (
-                <ShareNetwork size={28} />
+                <ShareNetwork size={28} weight="bold" />
               )}
               Compartir
-            </Button>
+            </DefaultButton>
           </section>
         </div>
       )}

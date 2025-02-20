@@ -8,6 +8,7 @@ import '@/assets/css/home.css';
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Footer } from '@/components/Footer';
+import { VoteButton } from '@/components/VoteButton';
 
 export const HomePage = () => {
   const location = useLocation();
@@ -30,7 +31,10 @@ export const HomePage = () => {
 
   return (
     <div className="flex w-full flex-col">
-      <motion.div ref={constraintsRef} className="first-section flex h-[85vh] flex-col items-center justify-center gap-10">
+      <motion.div
+        ref={constraintsRef}
+        className="first-section flex h-[85vh] flex-col items-center justify-center gap-10"
+      >
         <motion.div
           key={location.pathname}
           className="left-30 right-30 top-50 absolute -z-10"
@@ -83,9 +87,10 @@ export const HomePage = () => {
             delay: 0.5,
             ease: [0, 0.71, 0.2, 1.01]
           }}
+          className="mt-10 flex items-center justify-center gap-10"
         >
           <Card
-            className="mt-10 flex flex-col items-center justify-center gap-4 p-2"
+            className="flex h-full max-w-[24rem] flex-col items-center justify-center gap-4 p-2"
             bg="black"
             textColor="white"
             shadowColor="#913ddb"
@@ -99,6 +104,25 @@ export const HomePage = () => {
               <p>¡Obtén tu ticket aquí!</p>
             </div>
             {user ? <TicketButton /> : <LoginButton />}
+          </Card>
+
+          <Card
+            className="flex h-full max-w-[24rem] flex-col items-center justify-center gap-4 p-2"
+            bg="black"
+            textColor="white"
+            shadowColor="#913ddb"
+            borderColor="#7f61ff"
+            style={{
+              filter: 'drop-shadow(0 0 15px #4d3bd9)'
+            }}
+          >
+            <div className="flex flex-col items-center justify-center gap-2">
+              <h2 className="text-2xl">Votaciones aquí!</h2>
+              <p className="text-center">
+                ¡Revisa los nominados y elige por cuál creas que es mejor!
+              </p>
+            </div>
+            {user ? <VoteButton /> : <LoginButton />}
           </Card>
         </motion.div>
       </motion.div>

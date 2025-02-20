@@ -23,7 +23,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
         if (window.opener) {
           window.opener.postMessage(
             { error: 'No se ha podido iniciar sesión' },
-            window.location.origin,
+            window.location.origin
           );
           window.close();
         }
@@ -75,7 +75,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
         const loginWindow = window.open(
           REDIRECT_URL,
           '_blank',
-          `scrollbars=yes, width=${w}, height=${h}, top=${top}, left=${left}`,
+          `scrollbars=yes, width=${w}, height=${h}, top=${top}, left=${left}`
         );
 
         if (loginWindow) {
@@ -109,16 +109,6 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
       });
   };
 
-  const reloadUser = () => {
-    AuthService.reloadUser()
-      .then((user) => {
-        setUser(user);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
   useEffect(() => {
     AuthService.getSessionUser()
       .then((user) => {
@@ -130,7 +120,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, setUser, login, logout, twitchLogin, reloadUser }}>
+    <AuthContext.Provider value={{ user, setUser, login, logout, twitchLogin }}>
       {children}
     </AuthContext.Provider>
   );

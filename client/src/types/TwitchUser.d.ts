@@ -5,4 +5,5 @@ export interface TwitchUserType {
   displayName: string;
   profileImageUrl: string;
   ticket?: TicketType | null;
+  hasVoted: boolean;
 }

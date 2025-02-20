@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { DefaultButton } from './DefaultButton';
 
-export const TicketButton = () => {
+export const VoteButton = () => {
   const navigate = useNavigate();
 
   const handleClickLogin = () => {
-    navigate('/ticket');
+    navigate('/vote');
   };
 
-  return <DefaultButton onClick={handleClickLogin}>Conseguir mi ticket</DefaultButton>;
+  return <DefaultButton onClick={handleClickLogin}>Ir a votar</DefaultButton>;
 };

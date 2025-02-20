@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { AnimatePresence } from 'motion/react';
 import { Button, Popup } from 'pixel-retroui';
 import { NominationProps } from './VoteFrameWrapper';
+import { Play } from '@phosphor-icons/react';
 
 export const VideoFrame = ({
   nomination,
@@ -16,6 +17,8 @@ export const VideoFrame = ({
   const [error, setError] = useState(false);
   const [mouseEnter, setMouseEnter] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const onClosePopup = () => setIsOpen(false);
 
   return (
     <AnimatePresence>
@@ -47,11 +50,15 @@ export const VideoFrame = ({
             animate={{ opacity: 0.8 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute left-0 top-0 z-20 flex h-full w-full cursor-pointer flex-col items-center justify-center bg-black"
+            className="absolute left-0 top-0 z-20 flex h-full w-full cursor-pointer flex-col items-center justify-center"
             onClick={() => setIsOpen(true)}
           >
-            <div className="text-2xl text-white">Ver clip</div>
-            <div className="text-2xl text-white">{nomination.title}</div>
+            <div className="rounded-xl bg-black p-2 text-2xl text-white">
+              <Play size={48} color="white" weight="fill" />
+            </div>
+            <div className="absolute bottom-0 left-0 bg-black px-2 text-2xl text-white">
+              {nomination.title}
+            </div>
           </motion.div>
         )}
 
@@ -96,7 +103,7 @@ export const VideoFrame = ({
           >
             <Popup
               isOpen={isOpen}
-              onClose={() => setIsOpen(false)}
+              onClose={onClosePopup}
               bg="black"
               baseBg="#913ddb"
               textColor="white"

@@ -55,7 +55,9 @@ export const ImageFrame = ({
             transition={{ duration: 0.2 }}
             className="absolute bottom-0 left-0 z-20"
           >
-            <div className="bg-black bg-opacity-70 text-2xl text-white">{nomination.title}</div>
+            <div className="bg-black bg-opacity-70 px-2 text-2xl text-white">
+              {nomination.title}
+            </div>
           </motion.div>
         )}
 

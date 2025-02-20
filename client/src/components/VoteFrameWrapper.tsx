@@ -83,8 +83,7 @@ export const VoteFrameWrapper = ({ nomination }: { nomination: Nomination }) => 
       console.log('Voted for:', nomination.title);
     } else {
       toast.error('VoteSystem', {
-        description: `Ya tienes el máximo de votos permitidos para esta categoría.
-        Si deseas votar por este video, debes quitar un voto de otro video.`,
+        description: 'Estas votando más de lo permitido en la categoría.',
         duration: 10000
       });
     }
