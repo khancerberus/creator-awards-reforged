@@ -1,0 +1,9 @@
+{
+    "execMap": {
+        "ts": "ts-node -r dotenv/config --project tsconfig.json"
+    },
+    "watch": [
+        "src"
+    ],
+    "ext": "ts"
+}

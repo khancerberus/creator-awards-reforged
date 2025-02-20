@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/server.ts",
   "scripts": {
-    "dev": "ts-node-dev -r dotenv/config src/server.ts",
+    "dev": "nodemon --config nodemon.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "debug": "ts-node-dev --inspect=25999 --files --transpile-only --respawn --project tsconfig.json -r dotenv/config src/server.ts"
@@ -17,13 +17,13 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/express-session": "^1.18.1",
-    "@types/jsonwebtoken": "^9.0.7",
     "@types/morgan": "^1.9.9",
     "@types/multer": "^1.4.12",
     "@types/node": "^22.10.1",
     "eslint": "^9.16.0",
+    "nodemon": "^3.1.9",
     "prettier": "3.4.1",
-    "ts-node-dev": "^2.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.16.0"
   },
@@ -42,7 +42,6 @@
     "pino": "^9.5.0",
     "pino-pretty": "^13.0.0",
     "redis": "^4.7.0",
-    "sequelize": "^6.37.5",
-    "socket.io": "^4.8.1"
+    "sequelize": "^6.37.5"
   }
 }
