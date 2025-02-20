@@ -52,7 +52,7 @@ export class TwitchUsersController {
             const { id } = req.params;
             const toUpdate = req.body;
 
-            const updatedUser = await this.twitchUserModel.edit({ id, toUpdate });
+            const updatedUser = await this.twitchUserModel.edit({ id: Number(id), toUpdate });
             if (!updatedUser) {
                 res.status(404).json({ message: 'User not found' });
                 return;
@@ -67,7 +67,7 @@ export class TwitchUsersController {
     remove: RequestHandler = async (req, res, next) => {
         try {
             const { id } = req.params;
-            const removed = await this.twitchUserModel.remove({ id });
+            const removed = await this.twitchUserModel.remove({ id: Number(id) });
 
             if (removed === 0) {
                 res.status(404).json({ message: 'User not found' });

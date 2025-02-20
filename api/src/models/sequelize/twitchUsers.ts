@@ -32,7 +32,7 @@ export class TwitchUserModel extends Model<InferAttributes<TwitchUserModel>, Inf
         return TwitchUserModel.create(newTwitchUser);
     };
 
-    static edit = async ({ id, toUpdate }: { id: string; toUpdate: any }): Promise<TwitchUserModel | null> => {
+    static edit = async ({ id, toUpdate }: { id: number; toUpdate: any }): Promise<TwitchUserModel | null> => {
         const [rowsAffected] = await TwitchUserModel.update(toUpdate, { where: { id } });
         if (rowsAffected === 0) {
             return null;
@@ -41,7 +41,7 @@ export class TwitchUserModel extends Model<InferAttributes<TwitchUserModel>, Inf
         }
     };
 
-    static remove = async ({ id }: { id: string }): Promise<number> => {
+    static remove = async ({ id }: { id: number }): Promise<number> => {
         return TwitchUserModel.destroy({ where: { id } });
     };
 }
