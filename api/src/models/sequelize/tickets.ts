@@ -1,16 +1,15 @@
-import { DataTypes, Model } from 'sequelize';
-import { TicketsType } from '../../typings/tickets';
+import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import { sequelize } from '../../config/sequelize';
 
-export class Tickets extends Model implements TicketsType {
-    declare id: number;
-    declare imageUrl: string;
+export class TicketModel extends Model<InferAttributes<TicketModel>, InferCreationAttributes<TicketModel>> {
+    declare id: CreationOptional<number>;
+    declare imageUrl: CreationOptional<string>;
     declare isSub: boolean;
     declare isGift: boolean;
     declare tier: number;
 
-    static getById = async ({ id }: { id: number }): Promise<Tickets | null> => {
-        return Tickets.findByPk(id);
+    static getById = async ({ id }: { id: number }): Promise<TicketModel | null> => {
+        return TicketModel.findByPk(id);
     };
 
     static generate = async ({
@@ -21,12 +20,12 @@ export class Tickets extends Model implements TicketsType {
         isSub: boolean;
         isGift: boolean;
         tier: number;
-    }): Promise<Tickets> => {
-        return Tickets.create({ isSub, isGift, tier });
+    }): Promise<TicketModel> => {
+        return TicketModel.create({ isSub, isGift, tier });
     };
 }
 
-Tickets.init(
+TicketModel.init(
     {
         id: {
             type: DataTypes.INTEGER,

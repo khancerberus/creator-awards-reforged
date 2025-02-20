@@ -1,16 +1,16 @@
-import { CreationOptional, DataTypes, Model } from 'sequelize';
-import { CreateTwitchUserType, TwitchUserType, UpdateTwitchUserType } from '../../typings/twitchUsers';
+import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import { sequelize } from '../../config/sequelize';
-import { Tickets } from './tickets'
 
-export class TwitchUserModel extends Model implements TwitchUserType {
-    declare id: CreationOptional<string>;
+export class TwitchUserModel extends Model<InferAttributes<TwitchUserModel>, InferCreationAttributes<TwitchUserModel>> {
+    declare id: CreationOptional<number>;
     declare publicId: CreationOptional<string>;
     declare twitchId: string;
     declare email: string;
     declare displayName: string;
     declare profileImageUrl: string;
     declare ticketId: CreationOptional<number>;
+    declare hasVoted: boolean;
+    declare timestampVoted: number;
 
     static getById = async ({ id }: { id: string }): Promise<TwitchUserModel | null> => {
         return TwitchUserModel.findByPk(id);
@@ -28,7 +28,7 @@ export class TwitchUserModel extends Model implements TwitchUserType {
         return TwitchUserModel.findAll();
     };
 
-    static add = async (newTwitchUser: CreateTwitchUserType): Promise<TwitchUserModel | null> => {
+    static add = async (newTwitchUser: any): Promise<TwitchUserModel | null> => {
         return TwitchUserModel.create(newTwitchUser);
     };
 
@@ -36,8 +36,8 @@ export class TwitchUserModel extends Model implements TwitchUserType {
         id,
         toUpdate,
     }: {
-        id: string;
-        toUpdate: UpdateTwitchUserType;
+        id: number;
+        toUpdate: any;
     }): Promise<TwitchUserModel | null> => {
         const [rowsAffected] = await TwitchUserModel.update(toUpdate, { where: { id } });
         if (rowsAffected === 0) {
@@ -87,6 +87,16 @@ TwitchUserModel.init(
             type: DataTypes.INTEGER,
             allowNull: true,
         },
+        hasVoted: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+        },
+        timestampVoted: {
+            type: DataTypes.BIGINT,
+            allowNull: false,
+            defaultValue: Date.now()
+        }
     },
     {
         sequelize,
@@ -94,5 +104,3 @@ TwitchUserModel.init(
         timestamps: true,
     },
 );
-
-TwitchUserModel.belongsTo(Tickets, { foreignKey: 'ticketId' });

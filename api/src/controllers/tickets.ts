@@ -1,16 +1,16 @@
 import { RequestHandler } from 'express';
-import { Tickets } from '../models/sequelize/tickets';
+import { TicketModel } from '../models/sequelize/tickets';
 import { TwitchUserModel } from '../models/sequelize/twitchUsers';
 import { TwitchAPIService } from '../services/twitch.api';
 import { supabase } from '../config/supabaseS3';
 import { logger } from '../config';
 
 export class TicketController {
-    declare ticketModel: typeof Tickets;
+    declare ticketModel: typeof TicketModel;
     declare twitchUserModel: typeof TwitchUserModel;
 
     constructor({ twitchUserModel }: { twitchUserModel: typeof TwitchUserModel }) {
-        this.ticketModel = Tickets;
+        this.ticketModel = TicketModel;
         this.twitchUserModel = twitchUserModel;
     }
 

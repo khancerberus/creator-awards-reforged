@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { config } from '../config';
+import { UserFromTwitch } from '../typings/userFromTwitch';
+import { SubStatusFromTwitch } from '../typings/subStatusFromTwitch';
+import { TokenFromTwitch } from '../typings/tokenFromTwitch';
 
-const getToken = async ({ code }: { code: string }) => {
+const getToken = async ({ code }: { code: string }): Promise<TokenFromTwitch> => {
     const response = await axios.post(
         'https://id.twitch.tv/oauth2/token',
         {
@@ -21,7 +24,7 @@ const getToken = async ({ code }: { code: string }) => {
     return response.data;
 };
 
-const getUser = async ({ token, twitchId }: { token: string; twitchId: string }) => {
+const getUser = async ({ token, twitchId }: { token: string; twitchId: string }): Promise<UserFromTwitch> => {
     const response = await axios.get('https://api.twitch.tv/helix/users', {
         headers: {
             'Client-ID': config().twitchClientId,
@@ -40,7 +43,7 @@ const getUser = async ({ token, twitchId }: { token: string; twitchId: string })
     };
 };
 
-const getSubStatus = async ({ token, userId }: { token: string; userId: string }) => {
+const getSubStatus = async ({ token, userId }: { token: string; userId: string }): Promise<SubStatusFromTwitch> => {
     try {
         const response = await axios.get('https://api.twitch.tv/helix/subscriptions/user', {
             headers: {
